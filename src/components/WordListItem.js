@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const WordMeaning = ({word, meaning}) => (
+const WordListItem = ({word, meaning}) => (
   <View style={styles.container}>
     <View style={styles.wordContainer}>
       <Text style={styles.word} numberOfLines={1}>
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   meaning: {color: 'grey', fontSize: 12.5, letterSpacing: 0.6},
 });
 
-export default WordMeaning;
+export default WordListItem;

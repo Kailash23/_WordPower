@@ -5,7 +5,7 @@ import dimensions from '../common/helpers/dimensions';
 import {HEADER_HEIGHT} from '../components/Header';
 
 export const SHUFFLE_BUTTON_HEIGHT = 50;
-const TOP = 320;
+const TOP = 340;
 
 const OFFSET_TOP = HEADER_HEIGHT * dimensions.ratio + 20;
 

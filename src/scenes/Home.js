@@ -9,24 +9,16 @@ import FeaturedWord from '../components/FeaturedWord';
 import Header from '../components/Header';
 import SuffleButton from '../components/SuffleButton';
 import ScreenTitle from '../components/ScreenTitle';
+import UIHelper from '../common/helpers/UIHelper';
 
-const onScroll = contentOffset =>
-  Animated.event([
-    {
-      nativeEvent: {
-        contentOffset,
-      },
-    },
-  ]);
-
-const Home = () => {
+const Home = ({navigation}) => {
   const offsetY = useRef(new Animated.Value(0)).current;
   const {heightAnim, opacityAnim, translateAnim} = useHomeAnim(offsetY);
   const [scrollViewHeight, setScrollViewHeight] = useState(100);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar barStyle="dark-content" backgroundColor={'transparent'} />
-      <Header />
+      <Header navigation={navigation} />
       <>
         <ScreenTitle name={'My Vocab'} />
         <Animated.View
@@ -59,14 +51,14 @@ const Home = () => {
           bounces={false}
           decelerationRate={0.994}
           overScrollMode="never"
-          onScroll={onScroll({y: offsetY})}
+          onScroll={UIHelper.onScroll({y: offsetY})}
           showsVerticalScrollIndicator={false}
           scrollEventThrottle={1}
           style={[{transform: [{translateY: translateAnim}]}]}
           contentContainerStyle={[
             styles.scrollContent,
             {
-              paddingBottom: scrollViewHeight * 0.85,
+              paddingBottom: scrollViewHeight * 0.76,
             },
           ]}>
           <ListOfWords />

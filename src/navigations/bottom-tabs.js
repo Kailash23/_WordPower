@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../scenes/Home';
-import SettingsScreen from '../scenes/Settings';
+import SearchScreen from '../components/Search';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -29,10 +29,10 @@ export default function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="Favourites"
-        component={SettingsScreen}
+        name="Add Word"
+        component={SearchScreen}
         options={{
-          tabBarLabel: 'Favourites',
+          tabBarLabel: 'Add Word',
           tabBarIcon: ({color, size}) => (
             <MaterialIcons name="favorite" color={color} size={size} />
           ),

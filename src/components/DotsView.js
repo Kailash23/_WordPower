@@ -1,14 +1,11 @@
-import React from "react"
-import { View, StyleSheet } from "react-native"
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
 
-const DotsView = ({
-  color,
-  containerStyle,
-}) => {
-  const bgColor = color ? color : 'grey'
+const DotsView = ({color, containerStyle}) => {
+  const bgColor = color ? color : 'grey';
 
   return (
-    <View style={[{ flexDirection: "column" }, containerStyle]}>
+    <View style={[{flexDirection: 'column'}, containerStyle]}>
       <View
         style={[
           styles.dot,
@@ -36,8 +33,8 @@ const DotsView = ({
         ]}
       />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   dot: {
@@ -45,6 +42,6 @@ const styles = StyleSheet.create({
     width: 2.5,
     borderRadius: 2,
   },
-})
+});
 
-export default DotsView
+export default DotsView;

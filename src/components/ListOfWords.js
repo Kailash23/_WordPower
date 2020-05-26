@@ -1,8 +1,8 @@
 import React from 'react';
 import {View} from 'react-native';
-import WordMeaning from './WordMeaning';
+import WordListItem from './WordListItem';
 
-const words = [
+export const words = [
   {
     word: 'Speculate',
     meaning: 'To say about something without evidence',
@@ -166,7 +166,7 @@ const ListOfTracks = () => (
         marginHorizontal: 10,
       }}>
       {words.map((item, index) => (
-        <WordMeaning key={index} word={item.word} meaning={item.meaning} />
+        <WordListItem key={index} word={item.word} meaning={item.meaning} />
       ))}
     </View>
   </View>

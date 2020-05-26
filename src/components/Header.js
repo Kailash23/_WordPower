@@ -1,34 +1,35 @@
 import React from 'react';
-import {StyleSheet, ToastAndroid, View, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {StyleSheet, ToastAndroid, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import DotsView from './DotsView';
 
 export const HEADER_HEIGHT = 42;
 
-const Header = () => {
+const Header = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <>
-        <View style={styles.heartContainer}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Search');
+          }}
+          style={styles.iconContainer}>
           <Icon
-            onPress={() => {
-              ToastAndroid.show('Heart!', ToastAndroid.SHORT);
-            }}
-            name={'heart-outline'}
+            name="magnifier-add"
             size={26}
             style={styles.heart}
+            activeOpacity={0.5}
           />
-        </View>
-        <View style={styles.dotsContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              console.log('Dots')
-              ToastAndroid.show('Dots!', ToastAndroid.SHORT);
-            }}>
-            <DotsView color={'black'} />
-          </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.dotsContainer}
+          onPress={() => {
+            console.log('Dots');
+            ToastAndroid.show('Settings will be added soon.', ToastAndroid.SHORT);
+          }}>
+          <DotsView color={'black'} />
+        </TouchableOpacity>
       </>
     </SafeAreaView>
   );
@@ -42,9 +43,9 @@ const styles = StyleSheet.create({
     top: 0,
     height: HEADER_HEIGHT,
   },
-  heartContainer: {
+  iconContainer: {
     position: 'absolute',
-    right: 50,
+    left: 10,
     top: 6,
     height: HEADER_HEIGHT,
     width: HEADER_HEIGHT,
