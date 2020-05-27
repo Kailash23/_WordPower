@@ -19,11 +19,11 @@ const Search = ({navigation}) => {
     if (text.length >= 3) {
       let res = wordMap[text.substring(0, 3).toLowerCase()];
       if (res && text.length === 3) {
-        setResults(res.slice(0, 20));
+        setResults(res.slice(0, 10));
       } else {
         if (res) {
           let newRes = res.filter(word => word.startsWith(text.toLowerCase()));
-          setResults(newRes.slice(0, 20));
+          setResults(newRes.slice(0, 10));
         }
       }
     } else {
@@ -41,7 +41,7 @@ const Search = ({navigation}) => {
     navigation.goBack();
   };
 
-  const showEmptyResult = query.length > 3 && !results.length;
+  const showEmptyResult = query.length >= 3 && !results.length;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -50,7 +50,7 @@ const Search = ({navigation}) => {
           <BackBtnSearch
             onPress={() => navigation.goBack()}
             tintColor={'#CBCBCC'}
-            textStyle={styles.backBtnIcon}
+            textStyle={styles.searchBtnIcon}
           />
         </>
         <TextInput
@@ -101,14 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  searchIcon: {
-    bottom: 0,
-    marginLeft: 20,
-    padding: 14,
-    height: '100%',
-    textAlignVertical: 'center',
-  },
-  backBtnIcon: {
+  searchBtnIcon: {
     marginLeft: 20,
     padding: 14,
     height: '100%',
@@ -123,14 +116,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.4,
     marginTop: 2,
   },
-  clearIcon: {
-    position: 'absolute',
-    padding: 11.5,
-    height: '100%',
-    textAlignVertical: 'center',
-    right: 0,
-    paddingRight: 40,
-  },
   submitIcon: {
     position: 'absolute',
     padding: 11.5,
@@ -143,9 +128,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   scrollContent: {flexGrow: 1},
-  indicator: {
-    ...StyleSheet.absoluteFillObject,
-  },
 });
 
 export default Search;
