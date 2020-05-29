@@ -5,7 +5,7 @@ import BackBtnSearch from '../components/BackBtnSearch';
 import SubmitIcon from '../components/SubmitIcon';
 import ResultRow from '../components/ResultRow';
 import NoSuggestions from '../components/NoSuggestions';
-import wordMap from '../common/data/map.json';
+import wordMap from '../common/data/words.json';
 import _ from 'lodash';
 
 export const SEARCH_BAR_HEIGHT = 58;
