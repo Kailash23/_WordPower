@@ -7,7 +7,7 @@ import useHomeAnim from '../common/hooks/useHomeAnim';
 import ListOfWords from '../components/ListOfWords';
 import FeaturedWord from '../components/FeaturedWord';
 import Header from '../components/Header';
-import SuffleButton from '../components/SuffleButton';
+import ShuffleBtn from '../components/ShuffleBtn';
 import ScreenTitle from '../components/ScreenTitle';
 import UIHelper from '../common/helpers/UIHelper';
 
@@ -45,7 +45,7 @@ const Home = ({navigation}) => {
             }
           />
         </View>
-        <SuffleButton offsetY={offsetY} />
+        <ShuffleBtn offsetY={offsetY} />
         <Animated.ScrollView
           onLayout={e => setScrollViewHeight(e.nativeEvent.layout.height)}
           bounces={false}

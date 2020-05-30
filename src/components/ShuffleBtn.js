@@ -9,7 +9,7 @@ const TOP = 340;
 
 const OFFSET_TOP = HEADER_HEIGHT * dimensions.ratio + 20;
 
-const SuffleButton = ({offsetY}) => {
+const ShuffleBtn = ({offsetY}) => {
   const translateY = useRef(
     offsetY.interpolate({
       inputRange: [0, 300],
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SuffleButton;
+export default ShuffleBtn;

@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyleSheet, View, TextInput, ScrollView} from 'react-native';
 import BackBtnSearch from '../components/BackBtnSearch';
@@ -6,7 +6,7 @@ import SubmitIcon from '../components/SubmitIcon';
 import ResultRow from '../components/ResultRow';
 import NoSuggestions from '../components/NoSuggestions';
 import wordMap from '../common/data/words.json';
-import _ from 'lodash';
+import throttle from 'lodash/throttle';
 
 export const SEARCH_BAR_HEIGHT = 58;
 
@@ -56,9 +56,9 @@ const Search = ({navigation}) => {
         <TextInput
           autoFocus
           numberOfLines={1}
-          onChangeText={_.debounce(text => {
+          onChangeText={throttle(text => {
             handleQuery(text);
-          }, 400)}
+          }, 500)}
           placeholder="Enter word here."
           placeholderTextColor={'#A8A8A9'}
           selectionColor={'white'}
