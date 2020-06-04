@@ -1,10 +1,9 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 import HomeScreen from '../scenes/Home';
 import SearchScreen from '../scenes/Search';
-import LoadDatabaseScreen from '../scenes/LoadDatabase';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function AppStack() {
   return (
@@ -12,9 +11,8 @@ export default function AppStack() {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="LoadDatabase" component={LoadDatabaseScreen} />
-      {/* <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Search" component={SearchScreen} /> */}
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Search" component={SearchScreen} />
     </Stack.Navigator>
   );
 }

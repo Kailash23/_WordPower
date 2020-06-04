@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyleSheet, View, TextInput, ScrollView} from 'react-native';
 import BackBtnSearch from '../components/BackBtnSearch';
@@ -6,16 +6,19 @@ import SubmitIcon from '../components/SubmitIcon';
 import ResultRow from '../components/ResultRow';
 import NoSuggestions from '../components/NoSuggestions';
 import wordMap from '../common/data/words.json';
-import throttle from 'lodash/throttle';
+import debounce from 'lodash/debounce';
 
 export const SEARCH_BAR_HEIGHT = 58;
 
 const Search = ({navigation}) => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
+  const debounceDataFetch = useCallback(
+    debounce(fetchWordSuggestions, 1000),
+    [],
+  );
 
-  const handleQuery = text => {
-    setQuery(text);
+  function fetchWordSuggestions(text) {
     if (text.length >= 3) {
       let res = wordMap[text.substring(0, 3).toLowerCase()];
       if (res && text.length === 3) {
@@ -29,19 +32,24 @@ const Search = ({navigation}) => {
     } else {
       setResults([]);
     }
-  };
+  }
 
   const handleSubmit = () => {
     console.log(query);
     navigation.goBack();
   };
 
-  const handleResultPress = item => {
+  const handleSuggestionPress = item => {
     console.log(item);
     navigation.goBack();
   };
 
   const showEmptyResult = query.length >= 3 && !results.length;
+
+  const handleOnChangeText = text => {
+    setQuery(text);
+    debounceDataFetch(text);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -56,9 +64,7 @@ const Search = ({navigation}) => {
         <TextInput
           autoFocus
           numberOfLines={1}
-          onChangeText={throttle(text => {
-            handleQuery(text);
-          }, 500)}
+          onChangeText={handleOnChangeText}
           placeholder="Enter word here."
           placeholderTextColor={'#A8A8A9'}
           selectionColor={'white'}
@@ -80,7 +86,7 @@ const Search = ({navigation}) => {
           <ResultRow
             key={ind}
             result={result}
-            handleResultPress={handleResultPress}
+            handleResultPress={handleSuggestionPress}
           />
         ))}
         {showEmptyResult && <NoSuggestions queryToShow={query} />}
