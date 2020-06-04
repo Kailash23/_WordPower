@@ -3,7 +3,7 @@ import {View, Button, Text, ToastAndroid, StyleSheet} from 'react-native';
 import throttle from 'lodash/throttle';
 import {subscribe} from 'react-native-zip-archive';
 import ProgressCircle from 'react-native-progress/Circle';
-import {downloadDataBase} from '../services/WordPowerService';
+import {downloadDb} from '../services/LoadDataOffline';
 
 const LoadDatabase = ({navigation}) => {
   const [progress, setProgress] = useState(0);
@@ -33,7 +33,7 @@ const LoadDatabase = ({navigation}) => {
   );
 
   const downloadWordDatabase = async () => {
-    let promise = downloadDataBase(newProgress => {
+    let promise = downloadDb(newProgress => {
       updateProgressUI(newProgress / 2);
     });
 

@@ -1,34 +1,42 @@
 import React, {useState, useCallback} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {StyleSheet, View, TextInput, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
 import BackBtnSearch from '../components/BackBtnSearch';
 import SubmitIcon from '../components/SubmitIcon';
 import ResultRow from '../components/ResultRow';
 import NoSuggestions from '../components/NoSuggestions';
-import wordMap from '../common/data/words.json';
 import debounce from 'lodash/debounce';
+import {memGetSuggestions} from '../services/WordSuggestions';
+import {filterUptoLimit} from '../common/utils/filter';
 
 export const SEARCH_BAR_HEIGHT = 58;
 
 const Search = ({navigation}) => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
   const debounceDataFetch = useCallback(
-    debounce(fetchWordSuggestions, 1000),
+    debounce(fetchWordSuggestions, 700),
     [],
   );
 
-  function fetchWordSuggestions(text) {
+  async function fetchWordSuggestions(text) {
     if (text.length >= 3) {
-      let res = wordMap[text.substring(0, 3).toLowerCase()];
-      if (res && text.length === 3) {
-        setResults(res.slice(0, 10));
-      } else {
-        if (res) {
-          let newRes = res.filter(word => word.startsWith(text.toLowerCase()));
-          setResults(newRes.slice(0, 10));
-        }
-      }
+      text = text.toLowerCase();
+      let suggestions = await memGetSuggestions(text.substring(0, 3));
+      let filteredWords = filterUptoLimit(
+        suggestions,
+        word => word.startsWith(text),
+        10,
+      );
+      setResults(filteredWords);
+      setLoading(false);
     } else {
       setResults([]);
     }
@@ -44,11 +52,15 @@ const Search = ({navigation}) => {
     navigation.goBack();
   };
 
-  const showEmptyResult = query.length >= 3 && !results.length;
+  const showEmptyResult = query.length >= 3 && !results.length && !loading;
+  const showLoading = query.length >= 3 && loading;
 
   const handleOnChangeText = text => {
     setQuery(text);
     debounceDataFetch(text);
+    if (!loading) {
+      setLoading(true);
+    }
   };
 
   return (
@@ -90,6 +102,13 @@ const Search = ({navigation}) => {
           />
         ))}
         {showEmptyResult && <NoSuggestions queryToShow={query} />}
+        {showLoading && (
+          <ActivityIndicator
+            style={styles.indicator}
+            size={50}
+            color={'grey'}
+          />
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -134,6 +153,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   scrollContent: {flexGrow: 1},
+  indicator: {
+    ...StyleSheet.absoluteFillObject,
+  },
 });
 
 export default Search;

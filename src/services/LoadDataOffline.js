@@ -1,5 +1,4 @@
 import {
-  readDir,
   DocumentDirectoryPath,
   unlink,
   downloadFile,
@@ -7,11 +6,11 @@ import {
 } from 'react-native-fs';
 import {unzip} from 'react-native-zip-archive';
 
-const zippedDBFile = `${DocumentDirectoryPath}/WordPowerDB.zip`;
-const databaseFolder = `${DocumentDirectoryPath}/WordPowerDB`;
+const zippedDBFile = DocumentDirectoryPath + '/WordPowerDB.zip';
+const databaseFolder = DocumentDirectoryPath + '/WordPowerDB';
 const url = 'https://word-power-f39ad.web.app/WordPowerDB.zip';
 
-export const downloadDataBase = progressCb => {
+export const downloadDb = progressCb => {
   return new Promise(async (resolve, reject) => {
     try {
       deleteZippedDbFile();
@@ -34,7 +33,7 @@ export const downloadDataBase = progressCb => {
       console.log('Download Complete!', {statusCode});
 
       if (statusCode === 200) {
-        let zipResult = await unZipDatabseFile();
+        let zipResult = await unZipDbFile();
         console.log('File unzipping Complete!', zipResult);
         deleteZippedDbFile();
         resolve({statusCode, message: 'Database downloaded successfully!'});
@@ -47,7 +46,7 @@ export const downloadDataBase = progressCb => {
   });
 };
 
-const unZipDatabseFile = async () => {
+const unZipDbFile = async () => {
   try {
     return await unzip(zippedDBFile, DocumentDirectoryPath);
   } catch (e) {

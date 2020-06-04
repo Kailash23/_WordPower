@@ -17,6 +17,7 @@
     "@react-navigation/native": "^5.4.3",
     "@react-navigation/stack": "^5.4.0",
     "lodash": "^4.17.15",
+    "promise-memoize": "^1.2.1",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-fs": "^2.16.6",
