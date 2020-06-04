@@ -11,8 +11,9 @@ import BackBtnSearch from '../components/BackBtnSearch';
 import SubmitIcon from '../components/SubmitIcon';
 import ResultRow from '../components/ResultRow';
 import NoSuggestions from '../components/NoSuggestions';
-import debounce from 'lodash/debounce';
-import {memGetSuggestions} from '../services/WordSuggestions';
+import throttle from 'lodash/throttle';
+import {memGetSuggestions} from '../services/WordCompletion';
+import {fetchWordInfo} from '../services/FetchWordInfo';
 import {filterUptoLimit} from '../common/utils/filter';
 
 export const SEARCH_BAR_HEIGHT = 58;
@@ -22,11 +23,12 @@ const Search = ({navigation}) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const debounceDataFetch = useCallback(
-    debounce(fetchWordSuggestions, 700),
+    throttle(fetchWordSuggestions, 1500),
     [],
   );
 
   async function fetchWordSuggestions(text) {
+    console.log('called');
     if (text.length >= 3) {
       text = text.toLowerCase();
       let suggestions = await memGetSuggestions(text.substring(0, 3));
@@ -42,13 +44,18 @@ const Search = ({navigation}) => {
     }
   }
 
-  const handleSubmit = () => {
-    console.log(query);
+  const handleSubmit = async () => {
+    setLoading(true);
+    let info = await fetchWordInfo(query);
+    setLoading(true);
     navigation.goBack();
   };
 
-  const handleSuggestionPress = item => {
-    console.log(item);
+  const handleSuggestionPress = async item => {
+    setLoading(true);
+    let info = await fetchWordInfo(item);
+    setLoading(false);
+    console.log(info);
     navigation.goBack();
   };
 
