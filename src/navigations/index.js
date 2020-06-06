@@ -2,9 +2,9 @@ import 'react-native-gesture-handler';
 import React, {useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import AppNavigator from './app-navigator';
-import LoadDatabaseScreen from '../scenes/LoadDatabase';
+import LoadDatabaseScreen from '../screens/LoadDatabase';
 import {exists, DocumentDirectoryPath} from 'react-native-fs';
-import AppLoadingScreen from '../scenes/AppLoading';
+import AppLoadingScreen from '../screens/AppLoading';
 import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 import {enableScreens} from 'react-native-screens';
 

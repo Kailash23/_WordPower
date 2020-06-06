@@ -2,11 +2,11 @@ import {readFile, DocumentDirectoryPath} from 'react-native-fs';
 import pMemoize from 'promise-memoize';
 
 const generatePath = partialWord => {
-  const basePath = DocumentDirectoryPath + '/WordPowerDB/WordMap';
-  return `${basePath}/${partialWord[0]}/${partialWord}-map.json`;
+  const basePath = DocumentDirectoryPath + '/WordPowerDB/WordAC';
+  return `${basePath}/${partialWord[0]}/${partialWord}-ac.json`;
 };
 
-export const memGetSuggestions = pMemoize(getSuggestions, {maxAge: 20000});
+export const memGetSuggestions = pMemoize(getSuggestions, {maxAge: 30000});
 
 function getSuggestions(partialWord) {
   return new Promise(async resolve => {

@@ -1,5 +1,6 @@
 import {readFile, DocumentDirectoryPath} from 'react-native-fs';
 import {ToastAndroid} from 'react-native';
+
 const generatePath = word => {
   const basePath = DocumentDirectoryPath + '/WordPowerDB/WordDB';
   return `${basePath}/${word[0]}/${word.substring(0, 3)}-db.json`;
@@ -7,10 +8,11 @@ const generatePath = word => {
 
 const showToast = (info, word) => {
   let capitalisedWord = `${word.charAt(0).toUpperCase() + word.slice(1)}`;
+  let message;
   if (!info) {
-    var message = `No definitions found for this word - ${capitalisedWord}`;
+    message = `No definitions found for this word - ${capitalisedWord}`;
   } else {
-    var message = `${capitalisedWord} Saved!`;
+    message = `${capitalisedWord} Saved!`;
   }
   ToastAndroid.show(message, ToastAndroid.LONG);
 };

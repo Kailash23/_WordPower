@@ -3,7 +3,7 @@ import {View, Button, Text, ToastAndroid, StyleSheet} from 'react-native';
 import throttle from 'lodash/throttle';
 import {subscribe} from 'react-native-zip-archive';
 import ProgressCircle from 'react-native-progress/Circle';
-import {downloadDb} from '../services/LoadDataOffline';
+import {downloadDb} from '../api/LoadDataOffline';
 
 const LoadDatabase = ({navigation}) => {
   const [progress, setProgress] = useState(0);

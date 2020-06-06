@@ -12,8 +12,8 @@ import SubmitIcon from '../components/SubmitIcon';
 import ResultRow from '../components/ResultRow';
 import NoSuggestions from '../components/NoSuggestions';
 import throttle from 'lodash/throttle';
-import {memGetSuggestions} from '../services/WordCompletion';
-import {fetchWordInfo} from '../services/FetchWordInfo';
+import {memGetSuggestions} from '../api/WordCompletion';
+import {fetchWordInfo} from '../api/FetchWordInfo';
 import {filterUptoLimit} from '../common/utils/filter';
 
 export const SEARCH_BAR_HEIGHT = 58;
