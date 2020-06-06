@@ -1,13 +1,13 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const WordListItem = ({word, meaning}) => (
+const WordListItem = ({word, info}) => (
   <View style={styles.container}>
     <View style={styles.wordContainer}>
       <Text style={styles.word} numberOfLines={1}>
         {word}
       </Text>
-      <Text style={styles.meaning}>{meaning}</Text>
+      <Text style={styles.meaning}>{info?.definition}</Text>
     </View>
   </View>
 );

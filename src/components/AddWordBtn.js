@@ -9,7 +9,7 @@ const TOP = 340;
 
 const OFFSET_TOP = HEADER_HEIGHT * dimensions.ratio + 20;
 
-const ShuffleBtn = ({offsetY}) => {
+const AddWordBtn = ({offsetY, onPress}) => {
   const translateY = useRef(
     offsetY.interpolate({
       inputRange: [0, 300],
@@ -20,8 +20,8 @@ const ShuffleBtn = ({offsetY}) => {
   return (
     <Animated.View
       style={[styles.container, {transform: [{translateY: translateY}]}]}>
-      <TouchableOpacity activeOpacity={0.9} style={styles.button}>
-        <Text style={styles.btnText}>Suffle Word</Text>
+      <TouchableOpacity activeOpacity={0.9} style={styles.button} onPress={onPress}>
+        <Text style={styles.btnText}>Add Word</Text>
       </TouchableOpacity>
     </Animated.View>
   );
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ShuffleBtn;
+export default AddWordBtn;

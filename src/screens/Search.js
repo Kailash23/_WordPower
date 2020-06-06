@@ -15,6 +15,8 @@ import throttle from 'lodash/throttle';
 import {memGetSuggestions} from '../api/WordCompletion';
 import {fetchWordInfo} from '../api/FetchWordInfo';
 import {filterUptoLimit} from '../common/utils/filter';
+import {useDispatch} from 'react-redux';
+import {addWord} from '../redux/actions';
 
 export const SEARCH_BAR_HEIGHT = 58;
 
@@ -23,12 +25,12 @@ const Search = ({navigation}) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const debounceDataFetch = useCallback(
-    throttle(fetchWordSuggestions, 1500),
+    throttle(fetchWordSuggestions, 700),
     [],
   );
+  const dispatch = useDispatch();
 
   async function fetchWordSuggestions(text) {
-    console.log('called');
     if (text.length >= 3) {
       text = text.toLowerCase();
       let suggestions = await memGetSuggestions(text.substring(0, 3));
@@ -47,6 +49,9 @@ const Search = ({navigation}) => {
   const handleSubmit = async () => {
     setLoading(true);
     let info = await fetchWordInfo(query);
+    if (info) {
+      dispatch(addWord({[query]: info}));
+    }
     setLoading(true);
     navigation.goBack();
   };
@@ -54,8 +59,10 @@ const Search = ({navigation}) => {
   const handleSuggestionPress = async item => {
     setLoading(true);
     let info = await fetchWordInfo(item);
+    if (info) {
+      dispatch(addWord({[item]: info}));
+    }
     setLoading(false);
-    console.log(info);
     navigation.goBack();
   };
 
@@ -64,7 +71,7 @@ const Search = ({navigation}) => {
 
   const handleOnChangeText = text => {
     setQuery(text);
-    debounceDataFetch(text);
+    debounceDataFetch(text.trim());
     if (!loading) {
       setLoading(true);
     }

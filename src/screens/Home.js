@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {View, StyleSheet, StatusBar, Text} from 'react-native';
+import {View, StyleSheet, StatusBar} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Animated from 'react-native-reanimated';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -7,14 +7,18 @@ import useHomeAnim from '../common/hooks/useHomeAnim';
 import ListOfWords from '../components/ListOfWords';
 import FeaturedWord from '../components/FeaturedWord';
 import Header from '../components/Header';
-import ShuffleBtn from '../components/ShuffleBtn';
+import AddWordBtn from '../components/AddWordBtn';
 import ScreenTitle from '../components/ScreenTitle';
 import UIHelper from '../common/helpers/UIHelper';
+import {useSelector} from 'react-redux';
+import {getWordsList} from '../redux/selectors';
 
 const Home = ({navigation}) => {
   const offsetY = useRef(new Animated.Value(0)).current;
   const {heightAnim, opacityAnim, translateAnim} = useHomeAnim(offsetY);
   const [scrollViewHeight, setScrollViewHeight] = useState(100);
+  const wordsList = useSelector(getWordsList);
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar barStyle="dark-content" backgroundColor={'transparent'} />
@@ -45,8 +49,14 @@ const Home = ({navigation}) => {
             }
           />
         </View>
-        <ShuffleBtn offsetY={offsetY} />
+        <AddWordBtn
+          offsetY={offsetY}
+          onPress={() => {
+            navigation.navigate('Search');
+          }}
+        />
         <Animated.ScrollView
+          // Todo fix this - extra re-render
           onLayout={e => setScrollViewHeight(e.nativeEvent.layout.height)}
           bounces={false}
           decelerationRate={0.994}
@@ -61,7 +71,7 @@ const Home = ({navigation}) => {
               paddingBottom: scrollViewHeight * 0.76,
             },
           ]}>
-          <ListOfWords />
+          <ListOfWords wordsList={wordsList} />
         </Animated.ScrollView>
       </>
     </SafeAreaView>
