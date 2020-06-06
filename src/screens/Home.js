@@ -43,10 +43,7 @@ const Home = ({navigation}) => {
         <View style={styles.inputContainer}>
           <FeaturedWord
             offsetY={offsetY}
-            word={'Undermining'}
-            meaning={
-              'The action or process of lessening the effectiveness, power, or ability of someone or something, especially gradually or insidiously.'
-            }
+            item={wordsList[0]}
           />
         </View>
         <AddWordBtn
@@ -68,7 +65,7 @@ const Home = ({navigation}) => {
           contentContainerStyle={[
             styles.scrollContent,
             {
-              paddingBottom: scrollViewHeight * 0.76,
+              paddingBottom: scrollViewHeight * 0.82,
             },
           ]}>
           <ListOfWords wordsList={wordsList} />

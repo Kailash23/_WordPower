@@ -1,8 +1,8 @@
-import * as actionTypes from '../actions/types';
+import * as TYPES from '../actions/types';
 
 const words = (state = {}, action) => {
   switch (action.type) {
-    case actionTypes.ADD_WORD:
+    case TYPES.ADD_WORD:
       return {
         ...action.word,
         ...state,

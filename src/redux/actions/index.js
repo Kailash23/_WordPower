@@ -1,8 +1,6 @@
-import * as actionTypes from './types';
+import * as TYPES from './types';
 
-export const addWord = word => {
-  return {
-    type: actionTypes.ADD_WORD,
-    word: word,
-  };
-};
+export const addWord = word => ({
+  type: TYPES.ADD_WORD,
+  word: word,
+});
