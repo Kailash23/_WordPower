@@ -101,22 +101,22 @@ const Search = ({navigation}) => {
         contentContainerStyle={styles.scrollContent}
         style={styles.scrollView}>
         {showResults &&
-          results.map((result, ind) => (
+          results.map(result => (
             <ResultRow
-              key={ind}
+              key={result}
               result={result}
               handleResultPress={handleSuggestionPress}
             />
           ))}
         {showEmptyResult && <NoSuggestions queryToShow={query} />}
-        {showLoading && (
-          <ActivityIndicator
-            style={styles.indicator}
-            size={50}
-            color={'grey'}
-          />
-        )}
-        {normalState && <SearchIntro />}
+        {(normalState && <SearchIntro />) ||
+          (showLoading && (
+            <ActivityIndicator
+              style={styles.indicator}
+              size={50}
+              color={'grey'}
+            />
+          ))}
       </ScrollView>
     </SafeAreaView>
   );
