@@ -4,7 +4,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import AppNavigator from './app-navigator';
 import LoadDatabaseScreen from '../screens/LoadDatabase';
 import {exists, DocumentDirectoryPath} from 'react-native-fs';
-import AppLoadingScreen from '../screens/AppLoading';
 import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 import {enableScreens} from 'react-native-screens';
 
@@ -27,7 +26,7 @@ export default function App() {
   }, []);
 
   if (isDBExists === undefined) {
-    return <AppLoadingScreen />;
+    return null;
   }
 
   return (

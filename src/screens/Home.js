@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {View, StyleSheet, StatusBar} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Animated from 'react-native-reanimated';
@@ -6,6 +6,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import useHomeAnim from '../common/hooks/useHomeAnim';
 import ListOfWords from '../components/ListOfWords';
 import FeaturedWord from '../components/FeaturedWord';
+import RNBootSplash from 'react-native-bootsplash';
 import Header from '../components/Header';
 import AddWordBtn from '../components/AddWordBtn';
 import ScreenTitle from '../components/ScreenTitle';
@@ -18,6 +19,10 @@ const Home = ({navigation}) => {
   const {heightAnim, opacityAnim, translateAnim} = useHomeAnim(offsetY);
   const [scrollViewHeight, setScrollViewHeight] = useState(100);
   const wordsList = useSelector(getWordsList);
+
+  useEffect(() => {
+    RNBootSplash.hide({duration: 250});
+  }, []);
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>

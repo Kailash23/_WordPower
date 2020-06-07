@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Word Power</string>
+    <!-- Add the following lines -->
+    <!-- BootTheme should inherit from AppTheme -->
+    <style name="BootTheme" parent="AppTheme">
+        <!-- set the generated bootsplash.xml drawable as activity background -->
+        <item name="android:background">@drawable/bootsplash</item>
+    </style>
 </resources>

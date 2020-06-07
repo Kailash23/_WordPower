@@ -4,6 +4,7 @@ import throttle from 'lodash/throttle';
 import {subscribe} from 'react-native-zip-archive';
 import ProgressCircle from 'react-native-progress/Circle';
 import {downloadDb} from '../api/LoadDataOffline';
+import RNBootSplash from 'react-native-bootsplash';
 
 const LoadDatabase = ({navigation}) => {
   const [progress, setProgress] = useState(0);
@@ -16,11 +17,12 @@ const LoadDatabase = ({navigation}) => {
     const subscription = subscribe(({progress}) => {
       updateProgressUI((1 + progress) / 2);
     });
-
+    RNBootSplash.hide({duration: 250});
     return () => {
       subscription.remove();
     };
   }, []);
+
 
   const updateProgressUI = useCallback(
     throttle(val => {
@@ -74,6 +76,7 @@ const LoadDatabase = ({navigation}) => {
         thickness={10}
         showsText={true}
         strokeCap={'round'}
+        color={'#FFC90E'}
         progress={progress}
         size={200}
       />
@@ -81,7 +84,7 @@ const LoadDatabase = ({navigation}) => {
       <Button
         title={'Download Database'}
         onPress={onPress}
-        color={'#0076FF'}
+        color={'#FFC90E'}
         disabled={disableDownloadBtn}
       />
     </View>
@@ -94,10 +97,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     padding: 20,
+    backgroundColor : "#5A5B99"
   },
   message: {
     fontFamily: 'OpenSans-Bold',
-    color: '#0076FF',
+    color: '#FFC90E',
     textAlign: 'center',
     fontSize: 20,
   },
