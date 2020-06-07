@@ -2,7 +2,7 @@ import * as TYPES from '../actions/types';
 
 const words = (state = {}, action) => {
   switch (action.type) {
-    case TYPES.ADD_WORD:
+    case TYPES.WORD_FETCH_SUCCEEDED:
       return {
         ...action.word,
         ...state,

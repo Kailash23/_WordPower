@@ -11,13 +11,12 @@ import BackBtnSearch from '../components/BackBtnSearch';
 import SubmitIcon from '../components/SubmitIcon';
 import ResultRow from '../components/ResultRow';
 import NoSuggestions from '../components/NoSuggestions';
+import SearchIntro from '../components/SearchIntro';
 import throttle from 'lodash/throttle';
 import {memGetSuggestions} from '../api/WordCompletion';
-import {fetchWordInfo} from '../api/FetchWordInfo';
 import {filterUptoLimit} from '../common/utils/filter';
 import {useDispatch} from 'react-redux';
-import {addWord} from '../redux/actions';
-
+import {saveWord} from '../redux/actions';
 export const SEARCH_BAR_HEIGHT = 58;
 
 const Search = ({navigation}) => {
@@ -28,6 +27,7 @@ const Search = ({navigation}) => {
     throttle(fetchWordSuggestions, 700),
     [],
   );
+
   const dispatch = useDispatch();
 
   async function fetchWordSuggestions(text) {
@@ -47,27 +47,19 @@ const Search = ({navigation}) => {
   }
 
   const handleSubmit = async () => {
-    setLoading(true);
-    let info = await fetchWordInfo(query);
-    if (info) {
-      dispatch(addWord({[query]: info}));
-    }
-    setLoading(true);
+    dispatch(saveWord(query));
     navigation.goBack();
   };
 
   const handleSuggestionPress = async item => {
-    setLoading(true);
-    let info = await fetchWordInfo(item);
-    if (info) {
-      dispatch(addWord({[item]: info}));
-    }
-    setLoading(false);
+    dispatch(saveWord(item));
     navigation.goBack();
   };
 
   const showEmptyResult = query.length >= 3 && !results.length && !loading;
+  const showResults = results.length > 0;
   const showLoading = query.length >= 3 && loading;
+  const normalState = !showResults && !loading && !showEmptyResult;
 
   const handleOnChangeText = text => {
     setQuery(text);
@@ -108,13 +100,14 @@ const Search = ({navigation}) => {
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         style={styles.scrollView}>
-        {results.map((result, ind) => (
-          <ResultRow
-            key={ind}
-            result={result}
-            handleResultPress={handleSuggestionPress}
-          />
-        ))}
+        {showResults &&
+          results.map((result, ind) => (
+            <ResultRow
+              key={ind}
+              result={result}
+              handleResultPress={handleSuggestionPress}
+            />
+          ))}
         {showEmptyResult && <NoSuggestions queryToShow={query} />}
         {showLoading && (
           <ActivityIndicator
@@ -123,6 +116,7 @@ const Search = ({navigation}) => {
             color={'grey'}
           />
         )}
+        {normalState && <SearchIntro />}
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
 import words from './words';
 
-const wordPowerApp = combineReducers({
-  words,
+const rootReducer = combineReducers({
+  words
 });
 
-export default wordPowerApp;
+export default rootReducer;

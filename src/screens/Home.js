@@ -40,10 +40,10 @@ const Home = ({navigation}) => {
             style={styles.gradient}
           />
         </Animated.View>
-        <View style={styles.inputContainer}>
+        <View style={styles.featuredContainer}>
           <FeaturedWord
             offsetY={offsetY}
-            item={wordsList[0]}
+            item={wordsList[0] ? wordsList[0] : {}}
           />
         </View>
         <AddWordBtn
@@ -53,7 +53,6 @@ const Home = ({navigation}) => {
           }}
         />
         <Animated.ScrollView
-          // Todo fix this - extra re-render
           onLayout={e => setScrollViewHeight(e.nativeEvent.layout.height)}
           bounces={false}
           decelerationRate={0.994}
@@ -86,7 +85,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     ...StyleSheet.absoluteFillObject,
   },
-  inputContainer: {
+  featuredContainer: {
     ...StyleSheet.absoluteFillObject,
     marginTop: -10,
     top: 100,

@@ -1,6 +1,6 @@
 import * as TYPES from './types';
 
-export const addWord = word => ({
-  type: TYPES.ADD_WORD,
+export const saveWord = word => ({
+  type: TYPES.WORD_FETCH_REQUEST,
   word: word,
 });
