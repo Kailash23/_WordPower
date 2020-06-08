@@ -1,10 +1,19 @@
 import React, {useState, useCallback, useEffect} from 'react';
-import {View, Button, Text, ToastAndroid, StyleSheet} from 'react-native';
+import {
+  View,
+  Button,
+  Text,
+  ToastAndroid,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import throttle from 'lodash/throttle';
 import {subscribe} from 'react-native-zip-archive';
 import ProgressCircle from 'react-native-progress/Circle';
 import {downloadDb} from '../api/LoadDataOffline';
 import RNBootSplash from 'react-native-bootsplash';
+import Animated from 'react-native-reanimated';
+import UIHelper from '../common/helpers/UIHelper';
 
 const LoadDatabase = ({navigation}) => {
   const [progress, setProgress] = useState(0);
@@ -12,6 +21,7 @@ const LoadDatabase = ({navigation}) => {
   const [message, setMessage] = useState(
     'Download the database and enjoy the offline experience!',
   );
+  const scale = new Animated.Value(1);
 
   useEffect(() => {
     const subscription = subscribe(({progress}) => {
@@ -22,7 +32,6 @@ const LoadDatabase = ({navigation}) => {
       subscription.remove();
     };
   }, []);
-
 
   const updateProgressUI = useCallback(
     throttle(val => {
@@ -76,17 +85,30 @@ const LoadDatabase = ({navigation}) => {
         thickness={10}
         showsText={true}
         strokeCap={'round'}
-        color={'#FFC90E'}
+        color={'#FFAC33'}
         progress={progress}
         size={200}
       />
       <Text style={styles.message}>{message}</Text>
-      <Button
-        title={'Download Database'}
-        onPress={onPress}
-        color={'#FFC90E'}
-        disabled={disableDownloadBtn}
-      />
+      <Animated.View
+        style={[
+          styles.loadBtn,
+          {transform: [{scale}]},
+          disableDownloadBtn && styles.disableBtn,
+        ]}>
+        <TouchableOpacity
+          disabled={disableDownloadBtn}
+          activeOpacity={0.9}
+          onPressIn={() =>
+            Animated.timing(scale, UIHelper.btnScaleAnim.in).start()
+          }
+          onPress={onPress}
+          onPressOut={() =>
+            Animated.timing(scale, UIHelper.btnScaleAnim.out).start()
+          }>
+          <Text style={styles.btnTitle}>Load Database</Text>
+        </TouchableOpacity>
+      </Animated.View>
     </View>
   );
 };
@@ -97,13 +119,34 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     padding: 20,
-    backgroundColor : "#5A5B99"
+    backgroundColor: '#5A5B99',
   },
   message: {
-    fontFamily: 'OpenSans-Bold',
-    color: '#FFC90E',
+    fontFamily: 'OpenSans-SemiBold',
+    color: '#FFAC33',
     textAlign: 'center',
     fontSize: 20,
+  },
+  loadBtn: {
+    width: '60%',
+    backgroundColor: '#FFAC33',
+    aspectRatio: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    elevation: 3,
+    shadowColor: 'rgba(0,0,0, .4)',
+    shadowOffset: {height: 1, width: 1},
+    shadowOpacity: 1,
+    shadowRadius: 1,
+  },
+  disableBtn: {
+    backgroundColor: 'hsl(208, 8%, 90%)',
+  },
+  btnTitle: {
+    color: '#5A5B99',
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 16,
   },
 });
 

@@ -41,7 +41,7 @@ const Home = ({navigation}) => {
           <LinearGradient
             start={{x: 0, y: 0}}
             end={{x: 0, y: 0.7}}
-            colors={['white', '#57BDDA']}
+            colors={['white', '#9c9cc1']}
             style={styles.gradient}
           />
         </Animated.View>
