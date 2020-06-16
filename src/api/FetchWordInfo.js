@@ -7,7 +7,9 @@ const generatePath = word => {
 };
 
 const showToast = message => {
-  ToastAndroid.show(message, ToastAndroid.LONG);
+  setInterval(() => {
+    ToastAndroid.show(message, ToastAndroid.SHORT);
+  }, 500);
 };
 
 export function fetchWordInfo(word) {
