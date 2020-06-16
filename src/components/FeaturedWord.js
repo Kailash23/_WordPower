@@ -9,12 +9,12 @@ const FeaturedWord = ({offsetY, item}) => {
 
   const scaleAnim = offsetY.interpolate({
     inputRange: [0, 250],
-    outputRange: [1, 0.9],
+    outputRange: [1, 0.85],
     extrapolate: Animated.Extrapolate.CLAMP,
   });
 
   const opacityAnim = offsetY.interpolate({
-    inputRange: [0, 300],
+    inputRange: [0, 200],
     outputRange: [1, 0],
     extrapolate: Animated.Extrapolate.CLAMP,
   });

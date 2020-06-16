@@ -3,12 +3,10 @@ import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import Animated from 'react-native-reanimated';
 import UIHelper from '../common/helpers/UIHelper';
 
-export const MARGIN_HORIZONTAL = 14;
-
 const clock = new Animated.Clock();
 const opacityAnim = UIHelper.runTiming(clock, 0, 1, 500);
 
-const ResultRow = React.memo(({result, handleResultPress, containerStyle}) => {
+const ResultRow = React.memo(({result, handleResultPress}) => {
   const scale = new Animated.Value(1);
 
   return (
@@ -27,7 +25,6 @@ const ResultRow = React.memo(({result, handleResultPress, containerStyle}) => {
             opacity: opacityAnim,
             transform: [{scale}],
           },
-          containerStyle,
         ]}>
         <View style={styles.itemInfoContainer}>
           <Text numberOfLines={1} style={styles.word}>
@@ -41,15 +38,11 @@ const ResultRow = React.memo(({result, handleResultPress, containerStyle}) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: MARGIN_HORIZONTAL,
+    marginHorizontal: 14,
     alignItems: 'center',
     flexDirection: 'row',
     marginTop: 10,
     marginBottom: 3,
-  },
-  cover: {
-    height: 54,
-    width: 54,
   },
   itemInfoContainer: {
     flexDirection: 'column',
@@ -61,7 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     color: 'black',
     letterSpacing: 0.8,
-    fontSize: 20,
+    fontSize: 18,
   },
 });
 

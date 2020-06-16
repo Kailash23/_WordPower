@@ -1,18 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+
 const ScreenTitle = ({name}) => {
   return (
-    <SafeAreaView style={[styles.container]}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        <View
-          style={{
-            width: '54%',
-          }}>
-          <Text numberOfLines={1} style={[styles.title]}>
-            {name}
-          </Text>
-        </View>
+        <Text numberOfLines={1} style={styles.title}>
+          {name}
+        </Text>
       </View>
     </SafeAreaView>
   );

@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   StyleSheet,
@@ -17,12 +17,12 @@ import {memGetSuggestions} from '../api/WordCompletion';
 import {filterUptoLimit} from '../common/utils/filter';
 import {useDispatch} from 'react-redux';
 import {saveWord} from '../redux/actions';
-export const SEARCH_BAR_HEIGHT = 58;
 
 const Search = ({navigation}) => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const debounceDataFetch = useCallback(
     throttle(fetchWordSuggestions, 700),
     [],
@@ -37,7 +37,7 @@ const Search = ({navigation}) => {
       let filteredWords = filterUptoLimit(
         suggestions,
         word => word.startsWith(text),
-        10,
+        7,
       );
       setResults(filteredWords);
       setLoading(false);
@@ -46,14 +46,16 @@ const Search = ({navigation}) => {
     }
   }
 
-  const handleSubmit = async () => {
-    dispatch(saveWord(query));
-    navigation.goBack();
+  const fetchWordInfo = word => {
+    setLoading(true);
+    dispatch(saveWord(word));
+    setTimeout(() => {
+      navigation.goBack();
+    }, 0);
   };
 
-  const handleSuggestionPress = async item => {
-    dispatch(saveWord(item));
-    navigation.goBack();
+  const handleSubmit = () => {
+    fetchWordInfo(query);
   };
 
   const showEmptyResult = query.length >= 3 && !results.length && !loading;
@@ -63,22 +65,23 @@ const Search = ({navigation}) => {
 
   const handleOnChangeText = text => {
     setQuery(text);
-    debounceDataFetch(text.trim());
     if (!loading) {
       setLoading(true);
     }
   };
 
+  useEffect(() => {
+    debounceDataFetch(query.trim());
+  }, [query, debounceDataFetch]);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.searchBarContainer}>
-        <>
-          <BackBtnSearch
-            onPress={() => navigation.goBack()}
-            tintColor={'#CBCBCC'}
-            textStyle={styles.searchBtnIcon}
-          />
-        </>
+        <BackBtnSearch
+          onPress={() => navigation.goBack()}
+          tintColor={'#CBCBCC'}
+          textStyle={styles.searchBtnIcon}
+        />
         <TextInput
           autoFocus
           numberOfLines={1}
@@ -105,18 +108,18 @@ const Search = ({navigation}) => {
             <ResultRow
               key={result}
               result={result}
-              handleResultPress={handleSuggestionPress}
+              handleResultPress={fetchWordInfo}
             />
           ))}
+        {showLoading && (
+          <ActivityIndicator
+            style={styles.indicator}
+            size={50}
+            color={'black'}
+          />
+        )}
         {showEmptyResult && <NoSuggestions queryToShow={query} />}
-        {(normalState && <SearchIntro />) ||
-          (showLoading && (
-            <ActivityIndicator
-              style={styles.indicator}
-              size={50}
-              color={'grey'}
-            />
-          ))}
+        {normalState && <SearchIntro />}
       </ScrollView>
     </SafeAreaView>
   );
@@ -129,7 +132,8 @@ const styles = StyleSheet.create({
   },
   searchBarContainer: {
     backgroundColor: '#505153',
-    height: SEARCH_BAR_HEIGHT,
+    aspectRatio: 6,
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',

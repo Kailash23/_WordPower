@@ -1,12 +1,14 @@
 import React from 'react';
-import {StyleSheet, ToastAndroid, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import DotsView from './DotsView';
+import {useNavigation} from '@react-navigation/native';
+// import DotsView from './DotsView';
 
 export const HEADER_HEIGHT = 42;
 
-const Header = ({navigation}) => {
+const Header = () => {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <>
@@ -22,14 +24,12 @@ const Header = ({navigation}) => {
             activeOpacity={0.5}
           />
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.dotsContainer}
           onPress={() => {
-            console.log('Dots');
-            ToastAndroid.show('Settings will be added soon.', ToastAndroid.SHORT);
           }}>
           <DotsView color={'black'} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </>
     </SafeAreaView>
   );

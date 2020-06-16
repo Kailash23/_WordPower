@@ -1,7 +1,6 @@
 import React, {useState, useCallback, useEffect} from 'react';
 import {
   View,
-  Button,
   Text,
   ToastAndroid,
   StyleSheet,
@@ -12,8 +11,6 @@ import {subscribe} from 'react-native-zip-archive';
 import ProgressCircle from 'react-native-progress/Circle';
 import {downloadDb} from '../api/LoadDataOffline';
 import RNBootSplash from 'react-native-bootsplash';
-import Animated from 'react-native-reanimated';
-import UIHelper from '../common/helpers/UIHelper';
 
 const LoadDatabase = ({navigation}) => {
   const [progress, setProgress] = useState(0);
@@ -21,11 +18,10 @@ const LoadDatabase = ({navigation}) => {
   const [message, setMessage] = useState(
     'Download the database and enjoy the offline experience!',
   );
-  const scale = new Animated.Value(1);
 
   useEffect(() => {
-    const subscription = subscribe(({progress}) => {
-      updateProgressUI((1 + progress) / 2);
+    const subscription = subscribe(({progress: newProgress}) => {
+      updateProgressUI((1 + newProgress) / 2);
     });
     RNBootSplash.hide({duration: 250});
     return () => {
@@ -90,25 +86,13 @@ const LoadDatabase = ({navigation}) => {
         size={200}
       />
       <Text style={styles.message}>{message}</Text>
-      <Animated.View
-        style={[
-          styles.loadBtn,
-          {transform: [{scale}]},
-          disableDownloadBtn && styles.disableBtn,
-        ]}>
-        <TouchableOpacity
-          disabled={disableDownloadBtn}
-          activeOpacity={0.9}
-          onPressIn={() =>
-            Animated.timing(scale, UIHelper.btnScaleAnim.in).start()
-          }
-          onPress={onPress}
-          onPressOut={() =>
-            Animated.timing(scale, UIHelper.btnScaleAnim.out).start()
-          }>
-          <Text style={styles.btnTitle}>Load Database</Text>
-        </TouchableOpacity>
-      </Animated.View>
+      <TouchableOpacity
+        disabled={disableDownloadBtn}
+        style={[styles.loadBtn, disableDownloadBtn && styles.disableBtn]}
+        onPress={onPress}
+        activeOpacity={0.7}>
+        <Text style={styles.btnTitle}>Load Database</Text>
+      </TouchableOpacity>
     </View>
   );
 };

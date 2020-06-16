@@ -3,9 +3,9 @@ import React, {useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import AppNavigator from './app-navigator';
 import LoadDatabaseScreen from '../screens/LoadDatabase';
-import {exists, DocumentDirectoryPath} from 'react-native-fs';
 import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 import {enableScreens} from 'react-native-screens';
+import {getDbExistsAsync} from '../service/LocalStorage';
 
 enableScreens();
 const Stack = createNativeStackNavigator();
@@ -15,13 +15,8 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      try {
-        const dbPath = `${DocumentDirectoryPath}/WordPowerDB`;
-        setDBExists(await exists(dbPath));
-      } catch (e) {
-        setDBExists(false);
-        console.log('App Loading Error : ', e);
-      }
+      let status = await getDbExistsAsync();
+      setDBExists(status);
     })();
   }, []);
 

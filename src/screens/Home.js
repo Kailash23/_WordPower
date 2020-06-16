@@ -10,7 +10,6 @@ import RNBootSplash from 'react-native-bootsplash';
 import Header from '../components/Header';
 import AddWordBtn from '../components/AddWordBtn';
 import ScreenTitle from '../components/ScreenTitle';
-import UIHelper from '../common/helpers/UIHelper';
 import {useSelector} from 'react-redux';
 import {getWordsList} from '../redux/selectors';
 
@@ -25,9 +24,9 @@ const Home = ({navigation}) => {
   }, []);
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar barStyle="dark-content" backgroundColor={'transparent'} />
-      <Header navigation={navigation} />
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor={'white'} />
+      <Header />
       <>
         <ScreenTitle name={'My Vocab'} />
         <Animated.View
@@ -62,14 +61,17 @@ const Home = ({navigation}) => {
           bounces={false}
           decelerationRate={0.994}
           overScrollMode="never"
-          onScroll={UIHelper.onScroll({y: offsetY})}
+          onScroll={Animated.event([
+            {nativeEvent: {contentOffset: {y: offsetY}}},
+          ])}
+          scrollEnabled={!!wordsList.length}
           showsVerticalScrollIndicator={false}
           scrollEventThrottle={1}
-          style={[{transform: [{translateY: translateAnim}]}]}
+          style={{transform: [{translateY: translateAnim}]}}
           contentContainerStyle={[
             styles.scrollContent,
             {
-              paddingBottom: scrollViewHeight * 0.82,
+              paddingBottom: scrollViewHeight * 0.85,
             },
           ]}>
           <ListOfWords wordsList={wordsList} />
@@ -80,6 +82,7 @@ const Home = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+  container: {flex: 1, backgroundColor: 'white'},
   gradientContainer: {
     alignSelf: 'center',
     alignItems: 'center',
@@ -92,7 +95,6 @@ const styles = StyleSheet.create({
   },
   featuredContainer: {
     ...StyleSheet.absoluteFillObject,
-    marginTop: -10,
     top: 100,
   },
   scrollContent: {
