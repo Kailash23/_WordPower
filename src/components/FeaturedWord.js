@@ -1,11 +1,10 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import Animated from 'react-native-reanimated';
+import {Intro} from '../components/icons';
 
 const FeaturedWord = ({offsetY, item}) => {
   const word = Object.keys(item)[0];
-  const meaning = item[word]?.definition;
-  const example = item[word]?.example;
 
   const scaleAnim = offsetY.interpolate({
     inputRange: [0, 250],
@@ -18,6 +17,17 @@ const FeaturedWord = ({offsetY, item}) => {
     outputRange: [1, 0],
     extrapolate: Animated.Extrapolate.CLAMP,
   });
+
+  if (!word) {
+    return (
+      <View style={styles.intro}>
+        <Intro width={'80%'} height={'80%'} />
+      </View>
+    );
+  }
+
+  const meaning = item[word].definition;
+  const example = item[word].example;
 
   return (
     <Animated.View
@@ -85,6 +95,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginHorizontal: 50,
     marginTop: 20,
+  },
+  intro: {
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
 });
 

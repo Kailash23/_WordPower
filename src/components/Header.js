@@ -1,9 +1,8 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
-// import DotsView from './DotsView';
+import {SearchIcon} from '../components/icons';
 
 export const HEADER_HEIGHT = 42;
 
@@ -11,26 +10,13 @@ const Header = () => {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
-      <>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Search');
-          }}
-          style={styles.iconContainer}>
-          <Icon
-            name="magnifier-add"
-            size={26}
-            style={styles.heart}
-            activeOpacity={0.5}
-          />
-        </TouchableOpacity>
-        {/* <TouchableOpacity
-          style={styles.dotsContainer}
-          onPress={() => {
-          }}>
-          <DotsView color={'black'} />
-        </TouchableOpacity> */}
-      </>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Search');
+        }}
+        style={styles.iconContainer}>
+        <SearchIcon width={40} height={40} />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

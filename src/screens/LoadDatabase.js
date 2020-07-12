@@ -81,7 +81,7 @@ const LoadDatabase = ({navigation}) => {
         thickness={10}
         showsText={true}
         strokeCap={'round'}
-        color={'#FFAC33'}
+        color={'white'}
         progress={progress}
         size={200}
       />
@@ -107,13 +107,13 @@ const styles = StyleSheet.create({
   },
   message: {
     fontFamily: 'OpenSans-SemiBold',
-    color: '#FFAC33',
+    color: 'white',
     textAlign: 'center',
     fontSize: 20,
   },
   loadBtn: {
     width: '60%',
-    backgroundColor: '#FFAC33',
+    backgroundColor: 'white',
     aspectRatio: 5,
     justifyContent: 'center',
     alignItems: 'center',
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
   },
   disableBtn: {
-    backgroundColor: 'hsl(208, 8%, 90%)',
+    backgroundColor: '#141518',
   },
   btnTitle: {
     color: '#5A5B99',

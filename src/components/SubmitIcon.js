@@ -1,15 +1,12 @@
 import React from 'react';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {CheckIcon} from '../components/icons';
+import {TouchableOpacity} from 'react-native';
 
-const SubmitIcon = ({handlePress, iconStyle, size, color}) => {
+const SubmitIcon = ({onPress, size, color}) => {
   return (
-    <MaterialIcon
-      onPress={handlePress}
-      style={iconStyle}
-      name="check"
-      size={size}
-      color={color}
-    />
+    <TouchableOpacity {...{onPress}}>
+      <CheckIcon width={size} height={size} {...{color}} />
+    </TouchableOpacity>
   );
 };
 

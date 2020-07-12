@@ -7,16 +7,18 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import BackBtnSearch from '../components/BackBtnSearch';
-import SubmitIcon from '../components/SubmitIcon';
-import ResultRow from '../components/ResultRow';
-import NoSuggestions from '../components/NoSuggestions';
-import SearchIntro from '../components/SearchIntro';
 import throttle from 'lodash/throttle';
 import {memGetSuggestions} from '../api/WordCompletion';
 import {filterUptoLimit} from '../common/utils/filter';
 import {useDispatch} from 'react-redux';
 import {saveWord} from '../redux/actions';
+import {
+  BackBtn,
+  SubmitIcon,
+  ResultRow,
+  NoSuggestions,
+  SearchIntro,
+} from '../components';
 
 const Search = ({navigation}) => {
   const [query, setQuery] = useState('');
@@ -77,10 +79,11 @@ const Search = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.searchBarContainer}>
-        <BackBtnSearch
+        <BackBtn
           onPress={() => navigation.goBack()}
-          tintColor={'#CBCBCC'}
-          textStyle={styles.searchBtnIcon}
+          style={styles.backBtn}
+          color={'#CBCBCC'}
+          size={25}
         />
         <TextInput
           autoFocus
@@ -92,12 +95,7 @@ const Search = ({navigation}) => {
           style={styles.searchInput}
         />
         {query.length > 0 && (
-          <SubmitIcon
-            size={28}
-            color={'#CBCBCC'}
-            handlePress={handleSubmit}
-            iconStyle={styles.submitIcon}
-          />
+          <SubmitIcon size={25} color={'#CBCBCC'} onPress={handleSubmit} />
         )}
       </View>
       <ScrollView
@@ -115,7 +113,7 @@ const Search = ({navigation}) => {
           <ActivityIndicator
             style={styles.indicator}
             size={50}
-            color={'black'}
+            color={'grey'}
           />
         )}
         {showEmptyResult && <NoSuggestions queryToShow={query} />}
@@ -138,12 +136,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  searchBtnIcon: {
-    marginLeft: 20,
-    padding: 14,
-    height: '100%',
-    textAlignVertical: 'center',
-  },
   searchInput: {
     fontSize: 16,
     color: 'white',
@@ -153,20 +145,17 @@ const styles = StyleSheet.create({
     letterSpacing: 0.4,
     marginTop: 2,
   },
-  submitIcon: {
-    position: 'absolute',
-    padding: 11.5,
-    height: '100%',
-    textAlignVertical: 'center',
-    right: 0,
-    paddingRight: 16,
-  },
   scrollView: {
     backgroundColor: 'white',
   },
   scrollContent: {flexGrow: 1},
   indicator: {
     ...StyleSheet.absoluteFillObject,
+  },
+  backBtn: {
+    marginLeft: 5,
+    paddingLeft: 14,
+    paddingRight: 10,
   },
 });
 

@@ -1,7 +1,8 @@
 import React from 'react';
-import {Text, StyleSheet} from 'react-native';
+import {Text, StyleSheet, View} from 'react-native';
 import Animated from 'react-native-reanimated';
 import UIHelper from '../common/helpers/UIHelper';
+import {LookUp} from '../components/icons';
 
 const SearchIntro = React.memo(() => {
   const clock = new Animated.Clock();
@@ -14,6 +15,9 @@ const SearchIntro = React.memo(() => {
           opacity: opacityAnim,
         },
       ]}>
+      <View style={styles.image}>
+        <LookUp width={'100%'} height={'100%'} />
+      </View>
       <Text style={styles.header}>Look up a word in our dictionary</Text>
       <Text style={styles.subheader}>
         We have over 2 lakh words in our dictionary, which is available to you
@@ -43,6 +47,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: 'center',
   },
+  image: {width: '40%', aspectRatio: 1},
 });
 
 export default SearchIntro;

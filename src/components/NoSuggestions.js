@@ -1,16 +1,13 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {NoResult} from '../components/icons';
 
 const NoSuggestions = ({queryToShow}) => {
   return (
     <View style={styles.container}>
-      <MaterialCommunityIcon
-        style={styles.flagIcon}
-        name="flag-outline"
-        size={64}
-        color={'grey'}
-      />
+      <View style={styles.notFound}>
+        <NoResult width={'100%'} height={'100%'} />
+      </View>
       <Text style={styles.query}>
         No suggestions found for {`\'${queryToShow}\'`}
       </Text>
@@ -47,6 +44,7 @@ const styles = StyleSheet.create({
     maxWidth: '70%',
     lineHeight: 20,
   },
+  notFound: {width: '50%', aspectRatio: 1},
 });
 
 export default NoSuggestions;

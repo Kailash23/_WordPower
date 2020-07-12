@@ -4,14 +4,16 @@ import LinearGradient from 'react-native-linear-gradient';
 import Animated from 'react-native-reanimated';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useHomeAnim from '../common/hooks/useHomeAnim';
-import ListOfWords from '../components/ListOfWords';
-import FeaturedWord from '../components/FeaturedWord';
 import RNBootSplash from 'react-native-bootsplash';
-import Header from '../components/Header';
-import AddWordBtn from '../components/AddWordBtn';
-import ScreenTitle from '../components/ScreenTitle';
 import {useSelector} from 'react-redux';
 import {getWordsList} from '../redux/selectors';
+import {
+  FeaturedWord,
+  ListOfWords,
+  Header,
+  AddWordBtn,
+  ScreenTitle,
+} from '../components';
 
 const Home = ({navigation}) => {
   const offsetY = useRef(new Animated.Value(0)).current;
@@ -45,10 +47,7 @@ const Home = ({navigation}) => {
           />
         </Animated.View>
         <View style={styles.featuredContainer}>
-          <FeaturedWord
-            offsetY={offsetY}
-            item={wordsList[0] ? wordsList[0] : {}}
-          />
+          <FeaturedWord offsetY={offsetY} item={wordsList[0] || {}} />
         </View>
         <AddWordBtn
           offsetY={offsetY}
