@@ -39,15 +39,7 @@ const FeaturedWord = ({offsetY, item}) => {
         },
       ]}>
       <View style={styles.textContainer}>
-        <Text
-          numberOfLines={2}
-          style={[
-            styles.title,
-            {
-              fontSize: word && word.length > 36 ? 18 : 24,
-              marginTop: 0,
-            },
-          ]}>
+        <Text numberOfLines={2} style={styles.title}>
           {word}
         </Text>
         {meaning && <Text style={styles.meaning}>{meaning}</Text>}
@@ -78,6 +70,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.6,
     textAlign: 'center',
     marginHorizontal: 50,
+    marginTop: 0,
   },
   meaning: {
     marginTop: 5,

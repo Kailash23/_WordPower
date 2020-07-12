@@ -50,7 +50,6 @@ const LoadDatabase = ({navigation}) => {
 
     if (statusCode === 200) {
       console.log('File Downloaded');
-      ToastAndroid.show('Database downloaded!', ToastAndroid.SHORT);
       setProgress(1);
       setMessage('Download Complete!');
       setTimeout(() => {

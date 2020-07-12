@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import showToast from '../common/helpers/showToast';
 
 const WordListItem = ({word, info}) => (
   <View style={styles.container}>
@@ -7,7 +8,14 @@ const WordListItem = ({word, info}) => (
       <Text style={styles.word} numberOfLines={1}>
         {word}
       </Text>
-      <Text style={styles.meaning}>{info?.definition}</Text>
+      <Text
+        numberOfLines={2}
+        style={styles.meaning}
+        onPress={() => {
+          showToast(info?.definition);
+        }}>
+        {info?.definition}
+      </Text>
     </View>
   </View>
 );
@@ -17,6 +25,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 12.5,
+    paddingHorizontal: 10,
   },
   wordContainer: {
     flex: 1,

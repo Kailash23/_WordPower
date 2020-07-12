@@ -1,60 +1,56 @@
 import React from 'react';
-import {View, Text, FlatList, StyleSheet} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import WordListItem from './WordListItem';
 
-const ListOfTracks = ({wordsList}) => (
-  <View
-    style={{
-      backgroundColor: 'white',
-    }}>
-    <View
-      style={{
-        flex: 1,
-        marginHorizontal: 10,
-      }}>
-      <FlatList
-        data={wordsList}
-        renderItem={({item}) => {
-          let word = Object.keys(item)[0];
-          return <WordListItem word={word} info={item[word]} />;
+const {width, height} = Dimensions.get('window');
+const HEIGHT = 60;
+import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
+
+const createNewDataProvider = () => new DataProvider((r1, r2) => r1 !== r2);
+
+const ListOfTracks = ({wordsList}) => {
+  const [dataProvider, setDataProvider] = React.useState(
+    createNewDataProvider().cloneWithRows(wordsList),
+  );
+
+  const layoutProviderRef = React.useRef();
+
+  layoutProviderRef.current = new LayoutProvider(
+    () => 1,
+    (_, dim) => {
+      dim.width = width;
+      dim.height = HEIGHT;
+    },
+  );
+
+  const computedStyles = styles({...{width, height}});
+
+  React.useEffect(() => {
+    setDataProvider(createNewDataProvider().cloneWithRows(wordsList));
+  }, [wordsList]);
+
+  return (
+    <View style={{width, height: HEIGHT * wordsList.length}}>
+      <RecyclerListView
+        layoutProvider={layoutProviderRef.current}
+        dataProvider={dataProvider}
+        rowRenderer={(_, data) => {
+          let word = Object.keys(data)[0];
+          return <WordListItem word={word} info={data[word]} />;
         }}
-        ListEmptyComponent={
-          <View style={styles.container}>
-            <Text style={styles.header}>
-              Currently there are no saved words.
-            </Text>
-            <Text style={styles.subheader}>
-              Just click on the add word button above and type in the new word, it
-              will find its definitions and save it automatically.
-            </Text>
-          </View>
-        }
-        initialNumToRender={5}
-        keyExtractor={(_, ind) => ind.toString()}
+        canChangeSize
+        useWindowScroll
       />
     </View>
-  </View>
-);
+  );
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  header: {
-    fontWeight: '600',
-    fontSize: 16,
-    color: 'grey',
-    letterSpacing: 0.3,
-    textAlign: 'center',
-  },
-  subheader: {
-    fontSize: 14,
-    color: 'grey',
-    marginTop: 10,
-    textAlign: 'center',
-  },
-});
+const styles = ({height, width}) =>
+  StyleSheet.create({
+    container: {
+      height,
+      width,
+    },
+  });
+
 export default ListOfTracks;

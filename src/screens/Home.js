@@ -14,6 +14,7 @@ import {
   AddWordBtn,
   ScreenTitle,
 } from '../components';
+import Placeholder from '../components/Placeholder';
 
 const Home = ({navigation}) => {
   const offsetY = useRef(new Animated.Value(0)).current;
@@ -73,7 +74,11 @@ const Home = ({navigation}) => {
               paddingBottom: scrollViewHeight * 0.85,
             },
           ]}>
-          <ListOfWords wordsList={wordsList} />
+          {wordsList.length ? (
+            <ListOfWords wordsList={wordsList} />
+          ) : (
+            <Placeholder />
+          )}
         </Animated.ScrollView>
       </>
     </SafeAreaView>
