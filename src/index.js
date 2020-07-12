@@ -19,7 +19,7 @@ YellowBox.ignoreWarnings(['VirtualizedLists should never be nested']);
 
 const App = () => (
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
+    <PersistGate loading={null} {...{persistor}}>
       <Navigator />
     </PersistGate>
   </Provider>
