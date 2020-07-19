@@ -16,4 +16,3 @@ function* filterGenerator(array, condition, maxSize) {
 export const filterUptoLimit = (array, condition, maxSize) => {
   return [...filterGenerator(array, condition, maxSize)];
 };
-

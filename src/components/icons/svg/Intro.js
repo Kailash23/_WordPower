@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, {Path, Circle} from 'react-native-svg';
 
-const Intro = props => {
+const Intro = (props) => {
   return (
     <Svg
       data-name="Layer 1"

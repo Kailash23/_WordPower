@@ -1,12 +1,12 @@
 import {readFile, DocumentDirectoryPath} from 'react-native-fs';
 import {ToastAndroid} from 'react-native';
 
-const generatePath = word => {
+const generatePath = (word) => {
   const basePath = DocumentDirectoryPath + '/WordPowerDB/WordDB';
   return `${basePath}/${word[0]}/${word.substring(0, 3)}-db.json`;
 };
 
-const showToast = message => {
+const showToast = (message) => {
   setInterval(() => {
     ToastAndroid.show(message, ToastAndroid.SHORT);
   }, 500);

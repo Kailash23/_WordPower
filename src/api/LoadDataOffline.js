@@ -11,7 +11,7 @@ const zippedDBFile = DocumentDirectoryPath + '/WordPowerDB.zip';
 const databaseFolder = DocumentDirectoryPath + '/WordPowerDB';
 const url = 'https://word-power-f39ad.web.app/WordPowerDB.zip';
 
-export const downloadDb = progressCb => {
+export const downloadDb = (progressCb) => {
   return new Promise(async (resolve, reject) => {
     try {
       deleteZippedDbFile();
@@ -56,7 +56,7 @@ const unZipDbFile = async () => {
   }
 };
 
-const deleteFile = async filePath => {
+const deleteFile = async (filePath) => {
   try {
     if (await exists(filePath)) {
       await unlink(filePath);

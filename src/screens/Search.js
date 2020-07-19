@@ -38,7 +38,7 @@ const Search = ({navigation}) => {
       let suggestions = await memGetSuggestions(text.substring(0, 3));
       let filteredWords = filterUptoLimit(
         suggestions,
-        word => word.startsWith(text),
+        (word) => word.startsWith(text),
         7,
       );
       setResults(filteredWords);
@@ -48,7 +48,7 @@ const Search = ({navigation}) => {
     }
   }
 
-  const fetchWordInfo = word => {
+  const fetchWordInfo = (word) => {
     setLoading(true);
     dispatch(saveWord(word));
     setTimeout(() => {
@@ -65,7 +65,7 @@ const Search = ({navigation}) => {
   const showLoading = query.length >= 3 && loading;
   const normalState = !showResults && !loading && !showEmptyResult;
 
-  const handleOnChangeText = text => {
+  const handleOnChangeText = (text) => {
     setQuery(text);
     if (!loading) {
       setLoading(true);
@@ -102,7 +102,7 @@ const Search = ({navigation}) => {
         contentContainerStyle={styles.scrollContent}
         style={styles.scrollView}>
         {showResults &&
-          results.map(result => (
+          results.map((result) => (
             <ResultRow
               key={result}
               result={result}

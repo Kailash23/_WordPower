@@ -10,7 +10,7 @@ import Svg, {
 } from 'react-native-svg';
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
-const NoResult = props => {
+const NoResult = (props) => {
   return (
     <Svg
       data-name="Layer 1"

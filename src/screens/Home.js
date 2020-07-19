@@ -57,7 +57,7 @@ const Home = ({navigation}) => {
           }}
         />
         <Animated.ScrollView
-          onLayout={e => setScrollViewHeight(e.nativeEvent.layout.height)}
+          onLayout={(e) => setScrollViewHeight(e.nativeEvent.layout.height)}
           bounces={false}
           decelerationRate={0.994}
           overScrollMode="never"

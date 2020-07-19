@@ -30,7 +30,7 @@ const LoadDatabase = ({navigation}) => {
   }, []);
 
   const updateProgressUI = useCallback(
-    throttle(val => {
+    throttle((val) => {
       if (val !== 1) {
         setMessage(val < 0.5 ? 'Downloading...' : 'Few seconds left...');
         setProgress(val);
@@ -40,7 +40,7 @@ const LoadDatabase = ({navigation}) => {
   );
 
   const downloadWordDatabase = async () => {
-    let promise = downloadDb(newProgress => {
+    let promise = downloadDb((newProgress) => {
       updateProgressUI(newProgress / 2);
     });
 
@@ -58,7 +58,7 @@ const LoadDatabase = ({navigation}) => {
     }
   };
 
-  const handleDownFailure = msg => {
+  const handleDownFailure = (msg) => {
     setTimeout(() => {
       setProgress(0);
       setDisableDownloadBtn(false);
