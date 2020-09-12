@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, Pressable} from 'react-native';
 import Animated from 'react-native-reanimated';
 import {HEADER_HEIGHT} from './Header';
 import {btnScaleAnim} from '../utils';
@@ -26,14 +26,16 @@ export function AddWordBtn({offsetY, onPress}) {
         styles.container,
         {transform: [{translateY: translateY}, {scale}]},
       ]}>
-      <TouchableOpacity
+      <Pressable
+        android_disableSound={false}
+        android_ripple={{color: 'white'}}
         activeOpacity={1}
         style={styles.button}
         onPressIn={() => Animated.timing(scale, btnScaleAnim.in).start()}
         onPressOut={() => Animated.timing(scale, btnScaleAnim.out).start()}
         onPress={onPress}>
         <Text style={styles.btnText}>Add Word</Text>
-      </TouchableOpacity>
+      </Pressable>
     </Animated.View>
   );
 }

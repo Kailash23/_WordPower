@@ -6,7 +6,7 @@ import {runTiming} from '../utils';
 
 export const SearchIntro = React.memo(() => {
   const clock = new Animated.Clock();
-  const opacityAnim = runTiming(clock, 0, 1, 10000);
+  const opacityAnim = runTiming(clock, 0, 1, 4000);
   return (
     <Animated.View
       style={[
@@ -16,13 +16,9 @@ export const SearchIntro = React.memo(() => {
         },
       ]}>
       <View style={styles.image}>
-        <LookUp width={'100%'} height={'100%'} />
+        <LookUp width={'90%'} height={'90%'} />
       </View>
       <Text style={styles.header}>Look up a word in our dictionary</Text>
-      <Text style={styles.subheader}>
-        We have over 2 lakh words in our dictionary, which is available to you
-        offline.
-      </Text>
     </Animated.View>
   );
 });
@@ -41,11 +37,5 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
     textAlign: 'center',
   },
-  subheader: {
-    fontSize: 14,
-    color: 'grey',
-    marginTop: 10,
-    textAlign: 'center',
-  },
-  image: {width: '40%', aspectRatio: 1},
+  image: {width: '33%', aspectRatio: 1},
 });
