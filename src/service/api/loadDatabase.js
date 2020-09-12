@@ -5,7 +5,7 @@ import {
   exists,
 } from 'react-native-fs';
 import {unzip} from 'react-native-zip-archive';
-import {save} from '../../utils/storage';
+import {save} from '../../utils';
 
 import {DB_EXITS_FLAG_KEY} from '../../config/storeKey';
 

@@ -4,12 +4,11 @@ import * as TYPES from '../actions/types';
 
 function* fetchWordDef(action) {
   try {
-    const wordDef = yield call(fetchWordInfo, action.word);
-    console.log('wordInfo', wordDef);
+    const wordDef = yield call(fetchWordInfo, action.payload);
     yield put({
       type: TYPES.WORD_FETCH_SUCCEEDED,
-      word: {
-        [action.word]: wordDef,
+      payload: {
+        [action.payload]: wordDef,
       },
     });
   } catch (e) {

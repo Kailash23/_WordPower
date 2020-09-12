@@ -4,7 +4,7 @@ const words = (state = {}, action) => {
   switch (action.type) {
     case TYPES.WORD_FETCH_SUCCEEDED:
       return {
-        ...action.word,
+        ...action.payload,
         ...state,
       };
     default:

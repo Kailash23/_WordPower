@@ -5,7 +5,7 @@ import AppNavigator from './app-navigator';
 import LoadDatabaseScreen from '../screens/LoadDatabase';
 import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 import {enableScreens} from 'react-native-screens';
-import {load} from '../utils/storage';
+import {load} from '../utils';
 import {DB_EXITS_FLAG_KEY} from '../config/storeKey';
 
 enableScreens();
