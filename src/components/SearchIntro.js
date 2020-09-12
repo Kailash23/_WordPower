@@ -1,12 +1,12 @@
 import React from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 import Animated from 'react-native-reanimated';
-import UIHelper from '../common/helpers/UIHelper';
-import {LookUp} from '../components/icons';
+import {LookUp} from '../assets/icons';
+import {runTiming} from '../utils';
 
-const SearchIntro = React.memo(() => {
+export const SearchIntro = React.memo(() => {
   const clock = new Animated.Clock();
-  const opacityAnim = UIHelper.runTiming(clock, 0, 1, 10000);
+  const opacityAnim = runTiming(clock, 0, 1, 10000);
   return (
     <Animated.View
       style={[
@@ -49,5 +49,3 @@ const styles = StyleSheet.create({
   },
   image: {width: '40%', aspectRatio: 1},
 });
-
-export default SearchIntro;

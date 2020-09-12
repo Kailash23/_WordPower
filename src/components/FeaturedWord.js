@@ -1,9 +1,8 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import Animated from 'react-native-reanimated';
-import {Intro} from '../components/icons';
 
-const FeaturedWord = ({offsetY, item}) => {
+export function FeaturedWord({offsetY, item}) {
   const word = Object.keys(item)[0];
 
   const scaleAnim = offsetY.interpolate({
@@ -19,11 +18,7 @@ const FeaturedWord = ({offsetY, item}) => {
   });
 
   if (!word) {
-    return (
-      <View style={styles.intro}>
-        <Intro width={'80%'} height={'80%'} />
-      </View>
-    );
+    return null;
   }
 
   const meaning = item[word].definition;
@@ -62,7 +57,7 @@ const FeaturedWord = ({offsetY, item}) => {
       )}
     </Animated.View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -101,5 +96,3 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
 });
-
-export default FeaturedWord;

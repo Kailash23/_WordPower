@@ -9,7 +9,7 @@ import {
 import throttle from 'lodash/throttle';
 import {subscribe} from 'react-native-zip-archive';
 import ProgressCircle from 'react-native-progress/Circle';
-import {downloadDb} from '../api/LoadDataOffline';
+import {downloadDb} from '../service/api';
 import RNBootSplash from 'react-native-bootsplash';
 
 const LoadDatabase = ({navigation}) => {

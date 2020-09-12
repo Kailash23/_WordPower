@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, {Path} from 'react-native-svg';
 
-const BackIcon = props => {
+export function BackIcon(props) {
   return (
     <Svg viewBox="0 0 32 32" {...props}>
       <Path
@@ -12,6 +12,4 @@ const BackIcon = props => {
       />
     </Svg>
   );
-};
-
-export default BackIcon;
+}

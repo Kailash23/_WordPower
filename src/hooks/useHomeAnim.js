@@ -1,8 +1,7 @@
 import Animated from 'react-native-reanimated';
-import dimensions from '../helpers/dimensions';
 import {useRef} from 'react';
 
-const useHomeAnim = offsetY => {
+export function useHomeAnim(offsetY) {
   const opacityAnim = useRef(
     offsetY.interpolate({
       inputRange: [0, 220],
@@ -22,11 +21,9 @@ const useHomeAnim = offsetY => {
   const translateAnim = useRef(
     offsetY.interpolate({
       inputRange: [0, 300],
-      outputRange: [0, 54 * dimensions.ratio],
+      outputRange: [0, 70],
       extrapolate: Animated.Extrapolate.CLAMP,
     }),
   ).current;
   return {opacityAnim, heightAnim, translateAnim};
-};
-
-export default useHomeAnim;
+}

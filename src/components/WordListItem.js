@@ -1,17 +1,18 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const WordListItem = ({word, info}) => (
-  <View style={styles.container}>
-    <View style={styles.wordContainer}>
-      <Text style={styles.word} numberOfLines={1}>
-        {word}
-      </Text>
-      <Text style={styles.meaning}>{info?.definition}</Text>
+export function WordListItem({word, info}) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.wordContainer}>
+        <Text style={styles.word} numberOfLines={1}>
+          {word}
+        </Text>
+        <Text style={styles.meaning}>{info?.definition}</Text>
+      </View>
     </View>
-  </View>
-);
-
+  );
+}
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -30,5 +31,3 @@ const styles = StyleSheet.create({
   },
   meaning: {color: 'grey', fontSize: 12.5, letterSpacing: 0.6},
 });
-
-export default WordListItem;

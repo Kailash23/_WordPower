@@ -1,5 +1,5 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
-import {fetchWordInfo} from '../../api/FetchWordInfo';
+import {fetchWordInfo} from '../../service/api';
 import * as TYPES from '../actions/types';
 
 function* fetchWordDef(action) {

@@ -8,8 +8,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import throttle from 'lodash/throttle';
-import {memGetSuggestions} from '../api/WordCompletion';
-import {filterUptoLimit} from '../common/utils/filter';
+import {memGetSuggestions} from '../service/api';
+import {filterUptoLimit} from '../utils';
 import {useDispatch} from 'react-redux';
 import {saveWord} from '../redux/actions';
 import {

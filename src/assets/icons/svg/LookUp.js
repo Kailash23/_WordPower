@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, {Path, Circle} from 'react-native-svg';
 
-const LookUpIcon = props => {
+export function LookUp(props) {
   return (
     <Svg
       data-name="Layer 2"
@@ -66,6 +66,4 @@ const LookUpIcon = props => {
       />
     </Svg>
   );
-};
-
-export default LookUpIcon;
+}

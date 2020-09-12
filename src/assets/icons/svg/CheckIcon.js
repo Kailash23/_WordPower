@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, {Path} from 'react-native-svg';
 
-const Check = props => {
+export function CheckIcon(props) {
   return (
     <Svg viewBox="0 0 100 99.313" {...props}>
       <Path
@@ -10,6 +10,4 @@ const Check = props => {
       />
     </Svg>
   );
-};
-
-export default Check;
+}

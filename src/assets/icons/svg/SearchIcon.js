@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, {Path} from 'react-native-svg';
 
-const SearchIcon = props => {
+export function SearchIcon(props) {
   return (
     <Svg viewBox="0 0 128 128" width={64} height={64} {...props}>
       <Path
@@ -10,6 +10,4 @@ const SearchIcon = props => {
       />
     </Svg>
   );
-};
-
-export default SearchIcon;
+}

@@ -5,7 +5,8 @@ import AppNavigator from './app-navigator';
 import LoadDatabaseScreen from '../screens/LoadDatabase';
 import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 import {enableScreens} from 'react-native-screens';
-import {getDbExistsAsync} from '../service/LocalStorage';
+import {load} from '../utils/storage';
+import {DB_EXITS_FLAG_KEY} from '../config/storeKey';
 
 enableScreens();
 const Stack = createNativeStackNavigator();
@@ -15,7 +16,7 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      let status = await getDbExistsAsync();
+      let status = await load(DB_EXITS_FLAG_KEY);
       setDBExists(status);
     })();
   }, []);

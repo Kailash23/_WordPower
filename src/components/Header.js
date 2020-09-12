@@ -2,11 +2,11 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
-import {SearchIcon} from '../components/icons';
+import {SearchIcon} from '../assets/icons';
 
 export const HEADER_HEIGHT = 42;
 
-const Header = () => {
+export function Header() {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
@@ -19,7 +19,7 @@ const Header = () => {
       </TouchableOpacity>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -51,5 +51,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export default Header;

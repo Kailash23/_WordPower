@@ -1,6 +1,6 @@
 import Animated, {Easing} from 'react-native-reanimated';
 
-const btnScaleAnim = {
+export const btnScaleAnim = {
   in: {toValue: 0.98, duration: 50, easing: Easing.inOut(Easing.ease)},
   out: {
     toValue: 1,
@@ -19,7 +19,7 @@ const {
   stopClock,
 } = Animated;
 
-const runTiming = (clock, start, end, duration) => {
+export const runTiming = (clock, start, end, duration) => {
   const state = {
     finished: new Value(0),
     position: new Value(start),
@@ -40,10 +40,3 @@ const runTiming = (clock, start, end, duration) => {
     state.position,
   ]);
 };
-
-const UIHelper = {
-  runTiming,
-  btnScaleAnim,
-};
-
-export default UIHelper;

@@ -1,8 +1,8 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import {NoResult} from '../components/icons';
+import {NoResult} from '../assets/icons';
 
-const NoSuggestions = ({queryToShow}) => {
+export function NoSuggestions({queryToShow}) {
   return (
     <View style={styles.container}>
       <View style={styles.notFound}>
@@ -16,7 +16,7 @@ const NoSuggestions = ({queryToShow}) => {
       </Text>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -46,5 +46,3 @@ const styles = StyleSheet.create({
   },
   notFound: {width: '50%', aspectRatio: 1},
 });
-
-export default NoSuggestions;

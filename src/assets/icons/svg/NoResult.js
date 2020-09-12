@@ -10,7 +10,7 @@ import Svg, {
 } from 'react-native-svg';
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
-const NoResult = props => {
+export function NoResult(props) {
   return (
     <Svg
       data-name="Layer 1"
@@ -286,6 +286,4 @@ const NoResult = props => {
       <Circle cx={12} cy={93.02} r={12} fill="#6c63ff" opacity={0.1} />
     </Svg>
   );
-};
-
-export default NoResult;
+}

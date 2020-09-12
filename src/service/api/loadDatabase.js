@@ -5,7 +5,9 @@ import {
   exists,
 } from 'react-native-fs';
 import {unzip} from 'react-native-zip-archive';
-import {setDbExistsAsync} from '../service/LocalStorage';
+import {save} from '../../utils/storage';
+
+import {DB_EXITS_FLAG_KEY} from '../../config/storeKey';
 
 const zippedDBFile = DocumentDirectoryPath + '/WordPowerDB.zip';
 const databaseFolder = DocumentDirectoryPath + '/WordPowerDB';
@@ -16,7 +18,7 @@ export const downloadDb = progressCb => {
     try {
       deleteZippedDbFile();
       deleteDbFolder();
-      setDbExistsAsync(false);
+      save(DB_EXITS_FLAG_KEY, false);
       const downloadPromise = downloadFile({
         fromUrl: url,
         toFile: zippedDBFile,
@@ -37,7 +39,7 @@ export const downloadDb = progressCb => {
         let zipResult = await unZipDbFile();
         console.log('File unzipping Complete!', zipResult);
         deleteZippedDbFile();
-        setDbExistsAsync(true);
+        save(DB_EXITS_FLAG_KEY, true);
         resolve({statusCode, message: 'Database downloaded successfully!'});
       } else {
         reject({statusCode, message: 'Database downloaded failed!'});

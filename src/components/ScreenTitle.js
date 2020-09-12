@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-const ScreenTitle = ({name}) => {
+export function ScreenTitle({name}) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -12,7 +12,7 @@ const ScreenTitle = ({name}) => {
       </View>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -34,5 +34,3 @@ const styles = StyleSheet.create({
     zIndex: -5,
   },
 });
-
-export default ScreenTitle;

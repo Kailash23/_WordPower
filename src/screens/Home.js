@@ -3,7 +3,7 @@ import {View, StyleSheet, StatusBar} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Animated from 'react-native-reanimated';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import useHomeAnim from '../common/hooks/useHomeAnim';
+import {useHomeAnim} from '../hooks/useHomeAnim';
 import RNBootSplash from 'react-native-bootsplash';
 import {useSelector} from 'react-redux';
 import {getWordsList} from '../redux/selectors';
@@ -27,7 +27,7 @@ const Home = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor={'white'} />
+      <StatusBar barStyle="dark-content" backgroundColor={'#9c9cc1'} />
       <Header />
       <>
         <ScreenTitle name={'My Vocab'} />
@@ -41,8 +41,8 @@ const Home = ({navigation}) => {
           ]}>
           <LinearGradient
             start={{x: 0, y: 0}}
-            end={{x: 0, y: 0.7}}
-            colors={['white', '#9c9cc1']}
+            end={{x: 0, y: 1}}
+            colors={['#9c9cc1', '#FFF']}
             style={styles.gradient}
           />
         </Animated.View>
@@ -81,7 +81,7 @@ const Home = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: 'white'},
+  container: {flex: 1, backgroundColor: '#FFF'},
   gradientContainer: {
     alignSelf: 'center',
     alignItems: 'center',

@@ -1,20 +1,18 @@
 import React from 'react';
 import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import Animated from 'react-native-reanimated';
-import UIHelper from '../common/helpers/UIHelper';
+import {btnScaleAnim, runTiming} from '../utils';
 
 const clock = new Animated.Clock();
-const opacityAnim = UIHelper.runTiming(clock, 0, 1, 500);
+const opacityAnim = runTiming(clock, 0, 1, 500);
 
-const ResultRow = React.memo(({result, handleResultPress}) => {
+export const ResultRow = React.memo(({result, handleResultPress}) => {
   const scale = new Animated.Value(1);
 
   return (
     <TouchableOpacity
-      onPressIn={() => Animated.timing(scale, UIHelper.btnScaleAnim.in).start()}
-      onPressOut={() =>
-        Animated.timing(scale, UIHelper.btnScaleAnim.out).start()
-      }
+      onPressIn={() => Animated.timing(scale, btnScaleAnim.in).start()}
+      onPressOut={() => Animated.timing(scale, btnScaleAnim.out).start()}
       onPress={() => {
         handleResultPress(result);
       }}>
@@ -57,5 +55,3 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
-
-export default ResultRow;
