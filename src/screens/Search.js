@@ -11,7 +11,7 @@ import throttle from 'lodash/throttle';
 import {memGetSuggestions} from '../service/api';
 import {filterUptoLimit} from '../utils';
 import {useDispatch} from 'react-redux';
-import {saveWord} from '../redux/actions';
+import {fetchWordDefinition} from '../redux/slices/wordsSlice';
 import {
   BackBtn,
   SubmitIcon,
@@ -50,7 +50,7 @@ const Search = ({navigation}) => {
 
   const fetchWordInfo = word => {
     setLoading(true);
-    dispatch(saveWord(word));
+    dispatch(fetchWordDefinition(word));
     setTimeout(() => {
       navigation.goBack();
     }, 0);
