@@ -6,12 +6,11 @@ import {
 } from 'react-native-fs';
 import {unzip} from 'react-native-zip-archive';
 import {save} from '../../utils';
-
 import {DB_EXITS_FLAG_KEY} from '../../config/storeKey';
+import {DATABASE_URL} from '@env';
 
 const zippedDBFile = DocumentDirectoryPath + '/WordPowerDB.zip';
 const databaseFolder = DocumentDirectoryPath + '/WordPowerDB';
-const url = 'https://word-power-f39ad.web.app/WordPowerDB.zip';
 
 export const downloadDb = progressCb => {
   return new Promise(async (resolve, reject) => {
@@ -20,7 +19,7 @@ export const downloadDb = progressCb => {
       deleteDbFolder();
       save(DB_EXITS_FLAG_KEY, false);
       const downloadPromise = downloadFile({
-        fromUrl: url,
+        fromUrl: DATABASE_URL,
         toFile: zippedDBFile,
         progress: ({contentLength, jobId, bytesWritten}) => {
           if (downloadPromise.jobId === jobId) {

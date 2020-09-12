@@ -1,11 +1,5 @@
 import React, {useState, useCallback, useEffect} from 'react';
-import {
-  View,
-  Text,
-  ToastAndroid,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, ToastAndroid, StyleSheet, Pressable} from 'react-native';
 import throttle from 'lodash/throttle';
 import {subscribe} from 'react-native-zip-archive';
 import ProgressCircle from 'react-native-progress/Circle';
@@ -86,13 +80,13 @@ const LoadDatabase = ({navigation}) => {
         size={200}
       />
       <Text style={styles.message}>{message}</Text>
-      <TouchableOpacity
+      <Pressable
         disabled={disableDownloadBtn}
         style={[styles.loadBtn, disableDownloadBtn && styles.disableBtn]}
         onPress={onPress}
         activeOpacity={0.7}>
         <Text style={styles.btnTitle}>Load Database</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };

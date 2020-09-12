@@ -20,6 +20,7 @@
     "react": "16.13.1",
     "react-native": "0.63.0",
     "react-native-bootsplash": "^2.2.4",
+    "react-native-dotenv": "^2.4.0",
     "react-native-fs": "^2.16.6",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-linear-gradient": "^2.5.6",
