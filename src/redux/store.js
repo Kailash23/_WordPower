@@ -1,11 +1,12 @@
-import {createStore, applyMiddleware, compose} from 'redux';
+import {configureStore} from '@reduxjs/toolkit';
 import {persistStore, persistReducer} from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
-import rootReducer from './reducers';
+import rootReducer from './slices/wordsSlice';
 import createSagaMiddleware from 'redux-saga';
 import mySaga from './sagas';
 import reactotron from '../../reactotron';
 import Reactotron from 'reactotron-react-native';
+import thunk from 'redux-thunk';
 
 const persistConfig = {
   key: 'root',
@@ -18,17 +19,16 @@ const sagaMonitor = Reactotron.createSagaMonitor();
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const sagaMiddleware = createSagaMiddleware({sagaMonitor});
 
-const configureStore = () => {
-  let store = createStore(
-    persistedReducer,
-    compose(
-      applyMiddleware(sagaMiddleware),
-      (__DEV__ && reactotron.createEnhancer()) || undefined,
-    ),
-  );
-  let persistor = persistStore(store);
-  sagaMiddleware.run(mySaga);
-  return {store, persistor};
-};
+let store = configureStore({
+  reducer: persistedReducer,
+  middleware: [sagaMiddleware, thunk],
+  enhancers: (__DEV__ && [reactotron.createEnhancer()]) || undefined,
+});
 
-export default configureStore;
+// Redux persist
+let persistor = persistStore(store);
+
+//Redux Saga
+sagaMiddleware.run(mySaga);
+
+export {store, persistor};
