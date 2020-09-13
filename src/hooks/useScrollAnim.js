@@ -1,7 +1,7 @@
 import Animated from 'react-native-reanimated';
 import {useRef} from 'react';
 
-export function useHomeAnim(offsetY) {
+export function useScrollAnim(offsetY) {
   const opacityAnim = useRef(
     offsetY.interpolate({
       inputRange: [0, 220],

@@ -10,7 +10,7 @@ const LoadDatabase = ({navigation}) => {
   const [progress, setProgress] = useState(0);
   const [disableDownloadBtn, setDisableDownloadBtn] = useState(false);
   const [message, setMessage] = useState(
-    'Download the database and enjoy the offline experience!',
+    'Download the dictionary and enjoy the offline experience!',
   );
 
   useEffect(() => {
@@ -44,7 +44,6 @@ const LoadDatabase = ({navigation}) => {
 
     if (statusCode === 200) {
       console.log('File Downloaded');
-      ToastAndroid.show('Database downloaded!', ToastAndroid.SHORT);
       setProgress(1);
       setMessage('Download Complete!');
       setTimeout(() => {
@@ -85,7 +84,7 @@ const LoadDatabase = ({navigation}) => {
         style={[styles.loadBtn, disableDownloadBtn && styles.disableBtn]}
         onPress={onPress}
         activeOpacity={0.7}>
-        <Text style={styles.btnTitle}>Load Database</Text>
+        <Text style={styles.btnTitle}>Download Dictionary</Text>
       </Pressable>
     </View>
   );

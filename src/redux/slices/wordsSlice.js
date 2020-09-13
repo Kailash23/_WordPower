@@ -2,13 +2,20 @@ import {createAction, createSlice} from '@reduxjs/toolkit';
 
 export const fetchWordDefinition = createAction('FETCH_WORD');
 
+const initialState = {
+  words: {},
+};
+
 const wordsSlice = createSlice({
+  initialState,
   name: 'words',
-  initialState: {},
   reducers: {
     addWord(state, action) {
       const {word, definition} = action.payload;
-      state.words[word] = definition;
+      state.words = {
+        [word]: definition,
+        ...state.words,
+      };
     },
   },
 });

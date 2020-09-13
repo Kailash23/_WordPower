@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
     flex: 1,
     color: 'black',
     letterSpacing: 0.8,
-    fontSize: 18,
+    fontSize: 22,
   },
 });

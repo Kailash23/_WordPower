@@ -99,6 +99,7 @@ const Search = ({navigation}) => {
         )}
       </View>
       <ScrollView
+        keyboardShouldPersistTaps={'always'}
         contentContainerStyle={styles.scrollContent}
         style={styles.scrollView}>
         {showResults &&

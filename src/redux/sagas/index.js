@@ -12,7 +12,6 @@ function* fetchWordDef(action) {
         definition: wordDef,
       },
     });
-    console.log(addWord.type);
   } catch (e) {
     console.log(e);
   }

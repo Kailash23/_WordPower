@@ -13,7 +13,6 @@ function getSuggestions(partialWord) {
     let path = generatePath(partialWord);
     try {
       let output = await readFile(path);
-      console.log('<Heavy call>')
       resolve(JSON.parse(output));
     } catch (e) {
       console.log('Fetching suggestions : ', e);

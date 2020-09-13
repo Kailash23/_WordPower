@@ -3,7 +3,7 @@ import {View, StyleSheet, StatusBar} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Animated from 'react-native-reanimated';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {useHomeAnim} from '../hooks/useHomeAnim';
+import {useScrollAnim} from '../hooks/useScrollAnim';
 import RNBootSplash from 'react-native-bootsplash';
 import {useSelector} from 'react-redux';
 import {getWordsList} from '../redux/selectors';
@@ -17,7 +17,7 @@ import {
 
 const Home = ({navigation}) => {
   const offsetY = useRef(new Animated.Value(0)).current;
-  const {heightAnim, opacityAnim, translateAnim} = useHomeAnim(offsetY);
+  const {heightAnim, opacityAnim, translateAnim} = useScrollAnim(offsetY);
   const [scrollViewHeight, setScrollViewHeight] = useState(100);
   const wordsList = useSelector(getWordsList);
 
