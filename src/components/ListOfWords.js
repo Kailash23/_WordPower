@@ -1,16 +1,47 @@
 import React from 'react';
-import {View, FlatList, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Pressable, Alert} from 'react-native';
 import {WordListItem} from './WordListItem';
+import {FlatList} from 'react-native-gesture-handler';
+import {useDispatch} from 'react-redux';
+import {deleteWord} from '../redux/slices/wordsSlice';
 
 export function ListOfWords({wordsList}) {
+  const dispatch = useDispatch();
+
+  const renderItem = ({item}) => {
+    let word = Object.keys(item)[0];
+    return (
+      <Pressable
+        android_ripple={{color: '#9c9cc1'}}
+        onLongPress={() => {
+          Alert.alert(
+            'Delete?',
+            `Are you sure you want to delete the word '${word}'?`,
+            [
+              {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+              },
+              {
+                text: 'OK',
+                onPress: () => {
+                  dispatch(deleteWord(word));
+                },
+              },
+            ],
+            {cancelable: false},
+          );
+        }}>
+        <WordListItem word={word} info={item[word]} />
+      </Pressable>
+    );
+  };
+
   return (
     <FlatList
-      contentContainerStyle={styles.contentContainerStyle}
       data={wordsList}
-      renderItem={({item}) => {
-        let word = Object.keys(item)[0];
-        return <WordListItem word={word} info={item[word]} />;
-      }}
+      renderItem={renderItem}
       initialNumToRender={5}
       keyExtractor={(_, ind) => ind.toString()}
       ListEmptyComponent={
@@ -32,5 +63,4 @@ const styles = StyleSheet.create({
   message: {
     fontFamily: 'OpenSans-Regular',
   },
-  contentContainerStyle: {marginHorizontal: 15},
 });

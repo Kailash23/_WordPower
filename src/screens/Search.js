@@ -57,7 +57,7 @@ const Search = ({navigation}) => {
   };
 
   const handleSubmit = () => {
-    fetchWordInfo(query);
+    fetchWordInfo(query?.toLowerCase());
   };
 
   const showEmptyResult = query.length >= 3 && !results.length && !loading;

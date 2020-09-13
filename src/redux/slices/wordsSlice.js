@@ -17,9 +17,12 @@ const wordsSlice = createSlice({
         ...state.words,
       };
     },
+    deleteWord(state, action) {
+      delete state.words[action.payload];
+    },
   },
 });
 
-export const {addWord} = wordsSlice.actions;
+export const {addWord, deleteWord} = wordsSlice.actions;
 
 export default wordsSlice.reducer;

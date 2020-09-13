@@ -22,7 +22,7 @@ const Home = ({navigation}) => {
   const wordsList = useSelector(getWordsList);
 
   useEffect(() => {
-    RNBootSplash.hide({duration: 250});
+    RNBootSplash.hide({duration: 0});
   }, []);
 
   return (
