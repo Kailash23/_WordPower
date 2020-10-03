@@ -45,13 +45,13 @@ npm run android
 
 ## TODO
 
-- [ ]  Remove word from vocab
+- [x]  Remove word from vocab
 - [ ]  Backup saved words (Google Drive & SD Card)
 - [ ]  Login / Signup to use an app
 - [ ]  Add / Remove favorite word
-- [ ]  Placeholders / loading state
+- [x]  Placeholders / loading state
 - [ ]  Error boundary – Restart app button
 - [ ]  Settings Menu
-- [ ]  iOS Application
+- [x]  iOS Application
 - [ ]  Codepush
 - [ ]  Add tests & CI server
