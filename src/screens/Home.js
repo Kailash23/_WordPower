@@ -55,26 +55,27 @@ const Home = ({navigation}) => {
             navigation.navigate('Search');
           }}
         />
-        <Animated.ScrollView
-          onLayout={e => setScrollViewHeight(e.nativeEvent.layout.height)}
-          bounces={false}
-          decelerationRate={0.994}
-          overScrollMode="never"
-          onScroll={Animated.event([
-            {nativeEvent: {contentOffset: {y: offsetY}}},
-          ])}
-          scrollEnabled={!!wordsList.length}
-          showsVerticalScrollIndicator={false}
-          scrollEventThrottle={1}
-          style={{transform: [{translateY: translateAnim}]}}
-          contentContainerStyle={[
-            styles.scrollContent,
-            {
-              paddingBottom: scrollViewHeight * 0.85,
-            },
-          ]}>
-          <ListOfWords wordsList={wordsList} />
-        </Animated.ScrollView>
+        {!!wordsList.length && (
+          <Animated.ScrollView
+            onLayout={e => setScrollViewHeight(e.nativeEvent.layout.height)}
+            decelerationRate={0.994}
+            overScrollMode="never"
+            onScroll={Animated.event([
+              {nativeEvent: {contentOffset: {y: offsetY}}},
+            ])}
+            scrollEnabled={!!wordsList.length}
+            showsVerticalScrollIndicator={false}
+            scrollEventThrottle={1}
+            style={{transform: [{translateY: translateAnim}]}}
+            contentContainerStyle={[
+              styles.scrollContent,
+              {
+                paddingBottom: scrollViewHeight * 0.85,
+              },
+            ]}>
+            <ListOfWords wordsList={wordsList} />
+          </Animated.ScrollView>
+        )}
       </>
     </SafeAreaView>
   );

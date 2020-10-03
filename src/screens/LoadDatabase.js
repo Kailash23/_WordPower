@@ -1,10 +1,11 @@
 import React, {useState, useCallback, useEffect} from 'react';
-import {View, Text, ToastAndroid, StyleSheet, Pressable} from 'react-native';
+import {View, Text, StyleSheet, Pressable} from 'react-native';
 import throttle from 'lodash/throttle';
 import {subscribe} from 'react-native-zip-archive';
 import ProgressCircle from 'react-native-progress/Circle';
 import {downloadDb} from '../service/api';
 import RNBootSplash from 'react-native-bootsplash';
+import {displayToast} from '../utils';
 
 const LoadDatabase = ({navigation}) => {
   const [progress, setProgress] = useState(0);
@@ -59,7 +60,7 @@ const LoadDatabase = ({navigation}) => {
       setMessage('Something went wrong, please try again!');
     }, 1000);
     console.log('Downloading error', msg);
-    ToastAndroid.show('Database download error!', ToastAndroid.SHORT);
+    displayToast('Database download error!');
   };
 
   const onPress = async () => {

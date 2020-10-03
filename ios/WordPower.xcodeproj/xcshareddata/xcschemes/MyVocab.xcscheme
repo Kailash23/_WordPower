@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "MyVocab.app"
-               BlueprintName = "MyVocab"
-               ReferencedContainer = "container:MyVocab.xcodeproj">
+               BuildableName = "WordPower.app"
+               BlueprintName = "WordPower"
+               ReferencedContainer = "container:WordPower.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "MyVocabTests.xctest"
-               BlueprintName = "MyVocabTests"
-               ReferencedContainer = "container:MyVocab.xcodeproj">
+               BuildableName = "WordPowerTests.xctest"
+               BlueprintName = "WordPowerTests"
+               ReferencedContainer = "container:WordPower.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "MyVocab.app"
-            BlueprintName = "MyVocab"
-            ReferencedContainer = "container:MyVocab.xcodeproj">
+            BuildableName = "WordPower.app"
+            BlueprintName = "WordPower"
+            ReferencedContainer = "container:WordPower.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "MyVocab.app"
-            BlueprintName = "MyVocab"
-            ReferencedContainer = "container:MyVocab.xcodeproj">
+            BuildableName = "WordPower.app"
+            BlueprintName = "WordPower"
+            ReferencedContainer = "container:WordPower.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

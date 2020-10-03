@@ -8,7 +8,7 @@ import {unzip} from 'react-native-zip-archive';
 import {save} from '../../utils';
 import {DB_EXITS_FLAG_KEY} from '../../config/storeKey';
 import {DATABASE_URL} from '@env';
-
+console.log(DATABASE_URL);
 const zippedDBFile = DocumentDirectoryPath + '/WordPowerDB.zip';
 const databaseFolder = DocumentDirectoryPath + '/WordPowerDB';
 

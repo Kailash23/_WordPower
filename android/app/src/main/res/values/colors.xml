@@ -1,5 +1,5 @@
 <resources>
-    <color name="bootsplash_background">#5A5B99</color>
+    <color name="bootsplash_background">#5A5C99</color>
     <color name="splash">#5A5B99</color>
     <color name="statusbar">#5A5B99</color>
 </resources>

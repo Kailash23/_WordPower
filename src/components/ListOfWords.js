@@ -44,23 +44,6 @@ export function ListOfWords({wordsList}) {
       renderItem={renderItem}
       initialNumToRender={5}
       keyExtractor={(_, ind) => ind.toString()}
-      ListEmptyComponent={
-        <View style={styles.empty}>
-          <Text style={styles.message}>Saved words will appear here </Text>
-        </View>
-      }
     />
   );
 }
-
-const styles = StyleSheet.create({
-  empty: {
-    width: '100%',
-    aspectRatio: 3,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  message: {
-    fontFamily: 'OpenSans-Regular',
-  },
-});

@@ -1,7 +1,6 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import Animated from 'react-native-reanimated';
-import {Intro} from '../assets/icons';
 
 export function FeaturedWord({offsetY, item}) {
   const word = Object.keys(item)[0];
@@ -19,11 +18,7 @@ export function FeaturedWord({offsetY, item}) {
   });
 
   if (!word) {
-    return (
-      <View style={{marginBottom: 300}}>
-        <Intro />
-      </View>
-    );
+    return null;
   }
 
   const meaning = item[word].definition;
