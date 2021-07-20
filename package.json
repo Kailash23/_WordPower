@@ -19,7 +19,7 @@
     "lodash": "^4.17.15",
     "promise-memoize": "^1.2.1",
     "react": "16.13.1",
-    "react-native": "0.63.0",
+    "react-native": "0.64.1",
     "react-native-bootsplash": "^2.2.4",
     "react-native-dotenv": "^2.4.0",
     "react-native-fs": "^2.16.6",
